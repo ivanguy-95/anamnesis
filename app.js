@@ -19,7 +19,7 @@ import * as nutrition from './blocks/nutrition.js';
 import * as sleep     from './blocks/sleep.js';
 import * as family    from './blocks/family.js';
 import * as logistics from './blocks/logistics.js';
-import { openReport, downloadJson, listAttachedPdfs, downloadAttachedPdf, sendToDoctor } from './report.js';
+import { sendToDoctor } from './report.js';
 
 const root = document.getElementById('app');
 
@@ -92,45 +92,23 @@ function render() {
   }
 }
 
-// ----- Финальный экран: открыть отчёт, скачать JSON и вложения ------------
+// ----- Финальный экран: одна кнопка «Отправить врачу» ---------------------
+// Все файлы (HTML-отчёт, JSON-профиль, прикреплённые PDF) собираются
+// автоматически в письме — клиенту никакие отдельные скачивания не нужны.
 function renderDone() {
-  const pdfs = listAttachedPdfs();
   root.innerHTML = `
     <div class="done-screen">
       <h1>Анкета заполнена</h1>
-      <p>Спасибо! Нажмите «Отправить врачу», чтобы автоматически переслать анамнез. Можно также открыть отчёт или скачать файлы.</p>
+      <p>Нажмите кнопку ниже, чтобы отправить анамнез врачу.</p>
 
       <div class="done-actions">
-        <button class="btn-primary" id="send-doctor-btn"  type="button">Отправить врачу</button>
-        <button class="btn-ghost"   id="open-report-btn"  type="button">Открыть отчёт</button>
-        <button class="btn-ghost"   id="download-json-btn" type="button">Скачать JSON</button>
+        <button class="btn-primary" id="send-doctor-btn" type="button">Отправить врачу</button>
       </div>
 
       <div id="send-status" class="send-status" hidden></div>
-
-      ${pdfs.length ? `
-        <div class="done-attachments">
-          <h3>Прикреплённые файлы</h3>
-          <ul>
-            ${pdfs.map((p, i) => `
-              <li>
-                <span>${esc(p.label)}</span>
-                <button class="btn-link" type="button" data-pdf-idx="${i}">Скачать «${esc(p.pdf.name)}»</button>
-              </li>
-            `).join('')}
-          </ul>
-        </div>
-      ` : ''}
-
-      <p class="done-hint">Чтобы получить PDF — в открытом отчёте нажмите <b>Cmd + P</b> и выберите «Сохранить как PDF».</p>
     </div>
   `;
 
-  root.querySelector('#open-report-btn').addEventListener('click', openReport);
-  root.querySelector('#download-json-btn').addEventListener('click', downloadJson);
-
-  // Кнопка «Отправить врачу» — асинхронно вызывает /api/send и показывает
-  // статус отправки прямо под кнопками.
   const sendBtn = root.querySelector('#send-doctor-btn');
   const sendStatus = root.querySelector('#send-status');
   sendBtn.addEventListener('click', async () => {
@@ -151,21 +129,6 @@ function renderDone() {
       sendStatus.textContent = 'Не удалось отправить. Проверьте подключение к интернету или попробуйте позже.';
     }
   });
-
-  if (pdfs.length) {
-    root.querySelectorAll('[data-pdf-idx]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const idx = parseInt(btn.dataset.pdfIdx, 10);
-        downloadAttachedPdf(pdfs[idx].pdf);
-      });
-    });
-  }
-}
-
-function esc(v) {
-  if (v == null) return '';
-  return String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 loadProfile();
