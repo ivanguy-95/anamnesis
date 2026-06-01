@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Editors / tools
+.vscode/
+.idea/
+.claude/
+
+# Vercel
+.vercel/
+
+# Logs
+*.log
+
+# Env (никогда не коммитим ключи)
+.env
+.env.local
