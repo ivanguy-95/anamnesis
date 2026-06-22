@@ -136,12 +136,39 @@ body {
 }
 .brand { display: flex; align-items: center; }
 .brand img { height: 36px; width: auto; display: block; }
-#nav-toggle { display: none; }   /* десктоп: бургер не нужен — есть боковой бар */
-#nav-overlay { display: none; }  /* затемнение только на телефоне */
 .nav-label { display: none; }    /* на десктопе у иконок-кнопок подписи скрыты */
 
-/* Телефон: боковой бар превращается в выезжающее справа меню-drawer,
-   а в шапке появляется кнопка-бургер. Логотип остаётся слева сверху. */
+/* Кнопка-бургер: на десктопе скрыта (есть боковой бар). 3 полоски, которые
+   в открытом состоянии (body.nav-open) превращаются в крестик. */
+#nav-toggle.nav-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 11px;
+  background: transparent;
+  cursor: pointer;
+}
+#nav-toggle.nav-burger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text);
+  transition: transform 0.25s, opacity 0.2s;
+}
+body.nav-open #nav-toggle.nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+body.nav-open #nav-toggle.nav-burger span:nth-child(2) { opacity: 0; }
+body.nav-open #nav-toggle.nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Телефон: десктопный боковой бар скрывается, в шапке — бургер, а меню
+   разделов превращается в выпадающую карточку в правом верхнем углу. */
 @media (max-width: 800px) {
   #layout {
     flex-direction: column;
@@ -162,51 +189,48 @@ body {
     border-bottom: 1px solid var(--line);
   }
   .brand img { height: 30px; }
-  #nav-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    border: 1px solid var(--line);
-    background: #fff;
-    color: var(--text);
-    cursor: pointer;
-  }
-  #nav-toggle svg { width: 22px; height: 22px; }
+  #nav-toggle.nav-burger { display: flex; }
 
-  /* Меню-drawer */
+  /* Выпадающее меню-карточка под шапкой, справа */
   #section-nav {
     position: fixed;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 264px;
+    top: 70px;
+    right: 14px;
+    left: auto;
+    height: auto;
+    width: auto;
+    min-width: 220px;
     max-width: 82vw;
+    max-height: calc(100vh - 86px);
     margin-top: 0;
     z-index: 70;
     flex-direction: column;
     align-items: stretch;
-    gap: 4px;
-    padding: 70px 12px 24px;
-    border: 0;
-    border-radius: 0;
+    gap: 2px;
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
     background: #fff;
-    box-shadow: -14px 0 36px rgba(15, 23, 42, 0.18);
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.18);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     overflow-y: auto;
-    transform: translateX(100%);
-    transition: transform 0.26s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
   }
-  body.nav-open #section-nav { transform: translateX(0); }
+  body.nav-open #section-nav {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
 
   /* Пункты меню: иконка + подпись во всю ширину */
   .nav-item {
     width: 100%;
     height: auto;
-    border-radius: 14px;
+    border-radius: 9px;
     justify-content: flex-start;
     gap: 14px;
     padding: 12px 14px;
@@ -216,23 +240,9 @@ body {
     display: inline;
     font-family: inherit;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 500;
   }
   .nav-item.locked { opacity: 0.4; }
-
-  /* Затемнение под выезжающим меню */
-  #nav-overlay {
-    display: block;
-    position: fixed;
-    inset: 0;
-    z-index: 65;
-    background: rgba(15, 23, 42, 0.38);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s ease;
-  }
-  body.nav-open #nav-overlay { opacity: 1; visibility: visible; }
-  body.nav-open { overflow: hidden; }
 }
 
 /* ---------- Шапка шага ---------- */

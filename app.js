@@ -205,12 +205,22 @@ function setMenu(open) {
 function closeMenu() { setMenu(false); }
 function setupMenu() {
   const toggle = document.getElementById('nav-toggle');
-  const overlay = document.getElementById('nav-overlay');
-  if (toggle) {
-    toggle.addEventListener('click', () =>
-      setMenu(!document.body.classList.contains('nav-open')));
-  }
-  if (overlay) overlay.addEventListener('click', closeMenu);
+  const menu = document.getElementById('section-nav');
+  if (!toggle || !menu) return;
+  // Клик по бургеру — открыть/закрыть. stopPropagation, чтобы этот же клик
+  // не словил обработчик «клик вне меню» ниже.
+  toggle.addEventListener('click', e => {
+    e.stopPropagation();
+    setMenu(!document.body.classList.contains('nav-open'));
+  });
+  // Клик вне меню (и не по бургеру) — закрыть.
+  document.addEventListener('click', e => {
+    if (document.body.classList.contains('nav-open') &&
+        !menu.contains(e.target) && !toggle.contains(e.target)) {
+      closeMenu();
+    }
+  });
+  // Escape — закрыть.
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 }
 

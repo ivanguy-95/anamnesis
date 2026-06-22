@@ -22,9 +22,9 @@
     <div class="brand">
       <img id="brand-logo" alt="Логотип">
     </div>
-    <button id="nav-toggle" type="button" aria-label="Меню разделов" aria-expanded="false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    <button id="nav-toggle" class="nav-burger" type="button"
+      aria-label="Открыть меню" aria-expanded="false" aria-controls="section-nav">
+      <span></span><span></span><span></span>
     </button>
   </header>
 
@@ -35,9 +35,6 @@
     <nav id="section-nav" aria-label="Разделы анкеты"></nav>
     <main id="app"></main>
   </div>
-
-  <!-- Затемнение под выезжающее меню (только на телефоне). -->
-  <div id="nav-overlay"></div>
 
   <script type="module" src="app.js"></script>
 </body>
