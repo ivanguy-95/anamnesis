@@ -11,6 +11,7 @@
 
 import { loadProfile, getProfile, saveProfile } from './state.js';
 import { renderSectionNav } from './nav.js';
+import { initToggles } from './toggle.js';
 import * as preamble  from './blocks/preamble.js';
 import * as identity  from './blocks/identity.js';
 import * as eventStep from './blocks/event.js';
@@ -132,6 +133,9 @@ function render() {
   } else if (step === 'done') {
     renderDone();
   }
+
+  // Бинарные «Да/Нет» во всех блоках превращаем в переключатель-ползунок.
+  initToggles(root);
 }
 
 // ----- Финальный экран: одна кнопка «Отправить врачу» ---------------------
