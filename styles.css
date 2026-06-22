@@ -701,7 +701,7 @@ select.input {
 .dp-popup {
   position: absolute;
   z-index: 1001;
-  width: 300px;
+  width: min(300px, calc(100vw - 20px));
   padding: 16px;
   background: var(--bg);
   border: 1px solid var(--line);
@@ -787,4 +787,72 @@ select.input {
   background: var(--accent);
   color: #fff;
   box-shadow: none;
+}
+
+/* ===========================================================================
+   АДАПТИВ ПОД ТЕЛЕФОНЫ
+   Базовые стили рассчитаны на десктоп/планшет; ниже — последовательное
+   уплотнение под диагонали смартфонов. Брейкпоинты:
+     ≤800  — бар разделов уже стал верхней полосой (см. выше)
+     ≤600  — планшеты в портрете / крупные телефоны
+     ≤480  — основная масса смартфонов (360–430 CSS-px)
+     ≤360  — компактные телефоны (iPhone SE, узкие Android)
+   ===========================================================================*/
+
+/* Крупные телефоны / маленькие планшеты */
+@media (max-width: 600px) {
+  .step-title { font-size: 24px; }
+  .field-row { gap: 10px; }
+}
+
+/* Основная масса смартфонов */
+@media (max-width: 480px) {
+  body { font-size: 14.5px; }
+  #app { padding: 20px 16px 72px; }
+
+  .step-header { margin-bottom: 20px; padding-bottom: 14px; }
+  .step-eyebrow { font-size: 10px; }
+  .step-title { font-size: 22px; }
+  .step-lead { font-size: 14px; }
+
+  .form-section { margin: 22px 0; }
+  .form-section-title { font-size: 16px; }
+
+  /* Поля в ряд: гарантированно помещаются по два на узком экране */
+  .field { min-width: 120px; }
+
+  /* Кнопки навигации компактнее, чтобы «Назад» + «Сохранить и продолжить»
+     помещались в один ряд без переноса */
+  .btn-primary, .btn-ghost { font-size: 14px; padding: 11px 18px; }
+  .step-nav { gap: 10px; margin-top: 24px; padding-top: 16px; }
+
+  /* Гейт «Есть/Нет»: метка и радио переносятся аккуратно */
+  .gated-row > label { min-width: 140px; }
+
+  .info-text, .section-note, .field-help { font-size: 12.5px; }
+}
+
+/* Компактные телефоны (iPhone SE и т.п.) */
+@media (max-width: 360px) {
+  #app { padding: 18px 12px 64px; }
+  .step-title { font-size: 20px; }
+
+  /* На самых узких экранах поля выстраиваем в один столбец */
+  .field { min-width: 100%; }
+  .field-row { gap: 8px; }
+
+  .btn-primary, .btn-ghost { font-size: 13px; padding: 10px 14px; }
+
+  .nav-item { width: 38px; height: 38px; }
+  .nav-item svg { width: 19px; height: 19px; }
+
+  .level-card { padding: 14px 14px; }
+  .dp-popup { padding: 12px; }
+}
+
+/* Очень короткие экраны в ландшафте — уменьшаем вертикальные отступы,
+   чтобы шапка и навигация не съедали высоту. */
+@media (max-height: 460px) and (orientation: landscape) {
+  #app { padding-top: 14px; padding-bottom: 48px; }
+  .step-header { margin-bottom: 14px; }
 }
