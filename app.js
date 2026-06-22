@@ -9,7 +9,7 @@
    Доменная логика каждого экрана — в соответствующем модуле в blocks/.
    --------------------------------------------------------------------------- */
 
-import { loadProfile, getProfile } from './state.js';
+import { loadProfile, getProfile, saveProfile } from './state.js';
 import { renderSectionNav } from './nav.js';
 import * as preamble  from './blocks/preamble.js';
 import * as identity  from './blocks/identity.js';
@@ -25,10 +25,14 @@ import { sendToDoctor } from './report.js';
 const root = document.getElementById('app');
 const navHost = document.getElementById('section-nav');
 
+// Все известные шаги — для валидации восстановленного прогресса.
+const KNOWN_STEPS = [
+  'level', 'goal', 'identity', 'event', 'medical', 'endocrine',
+  'nutrition', 'sleep', 'family', 'logistics', 'done'
+];
+
 // Состояние навигации.
 let step = 'level';
-// 'level' | 'goal' | 'identity' | 'event' | 'medical' | 'endocrine'
-//  | 'nutrition' | 'sleep' | 'family' | 'logistics' | 'done'
 
 // Пройденные шаги — для бара разделов: на них можно прыгать назад/в текущий,
 // вперёд — только кнопкой «Дальше» (там валидация обязательных полей).
@@ -37,8 +41,31 @@ const visited = new Set([step]);
 function go(nextStep) {
   step = nextStep;
   visited.add(nextStep);
+  persistProgress();
   render();
   window.scrollTo(0, 0);
+}
+
+// Сохраняем текущий шаг и пройденные разделы в профиль (localStorage), чтобы
+// при перезагрузке сайт открылся ровно там, где клиент остановился. Сами
+// ответы полей сохраняются отдельно — через setAnswer в state.js.
+function persistProgress() {
+  const m = getProfile().meta;
+  m.currentStep = step;
+  m.visited = [...visited];
+  saveProfile();
+}
+
+// Восстанавливаем шаг и прогресс из сохранённого профиля (если есть).
+function restoreProgress() {
+  const m = getProfile().meta;
+  if (Array.isArray(m.visited)) {
+    m.visited.forEach(s => { if (KNOWN_STEPS.includes(s)) visited.add(s); });
+  }
+  if (KNOWN_STEPS.includes(m.currentStep)) {
+    step = m.currentStep;
+    visited.add(step);
+  }
 }
 
 function render() {
@@ -147,4 +174,5 @@ function renderDone() {
 }
 
 loadProfile();
+restoreProgress();
 render();
