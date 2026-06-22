@@ -37,9 +37,9 @@ const SECTIONS = [
   { key: 'endocrine', steps: ['endocrine'],     step: 'endocrine', label: 'Гормоны',      icon: 'droplet' },
   { key: 'nutrition', steps: ['nutrition'],     step: 'nutrition', label: 'Питание',      icon: 'utensils' },
   { key: 'sleep',     steps: ['sleep'],         step: 'sleep',     label: 'Сон',          icon: 'moon' },
-  { key: 'family',    steps: ['family'],        step: 'family',    label: 'Семья',        icon: 'users', pro: true },
-  { key: 'logistics', steps: ['logistics'],     step: 'logistics', label: 'Логистика',    icon: 'pin',   pro: true },
-  { key: 'done',      steps: ['done'],          step: 'done',      label: 'Отправка',     icon: 'check' }
+  { key: 'family',    steps: ['family'],        step: 'family',    label: 'Генетика',     icon: 'users', pro: true },
+  { key: 'logistics', steps: ['logistics'],     step: 'logistics', label: 'Местность',    icon: 'pin',   pro: true },
+  { key: 'done',      steps: ['done'],          step: 'done',      label: 'Итог',         icon: 'check' }
 ];
 
 export function renderSectionNav(host, { current, visited, level, onJump }) {
