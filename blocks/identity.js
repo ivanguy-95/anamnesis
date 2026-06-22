@@ -18,6 +18,7 @@
    --------------------------------------------------------------------------- */
 
 import { getProfile, setAnswer } from '../state.js';
+import { validateRequired } from '../validate.js';
 
 const BLOCK_ID = 'identity';
 
@@ -329,7 +330,7 @@ export function render(container, { onBack, onNext }) {
 
     <nav class="step-nav">
       <button class="btn-ghost" id="back-btn" type="button">← Назад</button>
-      <button class="btn-primary" id="next-btn" type="button">Сохранить и продолжить →</button>
+      <button class="btn-primary" id="next-btn" type="button">Сохранить и продолжить</button>
     </nav>
   `;
 
@@ -449,10 +450,9 @@ export function render(container, { onBack, onNext }) {
   });
 
   // ---------- Навигация ----------
-  // Валидация обязательных полей пока не блокирует переход — добавим её
-  // отдельно, когда подключим финальное резюме и список «пропущенных».
   container.querySelector('#back-btn').addEventListener('click', onBack);
   container.querySelector('#next-btn').addEventListener('click', () => {
+    if (!validateRequired(container)) return;
     profile.blocks[BLOCK_ID].status = 'done';
     onNext();
   });

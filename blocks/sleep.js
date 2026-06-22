@@ -209,7 +209,7 @@ export function render(container, { onBack, onNext }) {
 
     <nav class="step-nav">
       <button class="btn-ghost" id="back-btn" type="button">← Назад</button>
-      <button class="btn-primary" id="next-btn" type="button">Сохранить и продолжить →</button>
+      <button class="btn-primary" id="next-btn" type="button">Сохранить и продолжить</button>
     </nav>
   `;
 

@@ -13,15 +13,18 @@
   --text-2: #475569;
   --text-3: #94A3B8;
 
-  --accent: #0F766E;      /* приглушённый teal — врачебный, не «маркетинговый» */
-  --accent-hover: #0D655E;
-  --accent-soft: #CCFBF1;
+  --accent: #347AE9;      /* фирменный синий */
+  --accent-hover: #2563C9; /* затемнённый оттенок для hover */
+  --accent-soft: #E1EEFC;  /* светло-синяя заливка (выбор/подсветка) */
+  --accent-light: #75D3FB; /* голубой акцент */
+  --accent-light-soft: #E2F6FE;
   --danger: #DC2626;
   --danger-soft: #FEE2E2;
   --warn: #D97706;
 
   --radius: 10px;
   --radius-sm: 6px;
+  --radius-pill: 40px;     /* закругление кнопок */
 
   --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto,
                "Helvetica Neue", Arial, sans-serif;
@@ -228,8 +231,8 @@ select.input {
   font-family: inherit;
   font-size: 15px;
   font-weight: 600;
-  padding: 12px 22px;
-  border-radius: var(--radius-sm);
+  padding: 12px 26px;
+  border-radius: var(--radius-pill);
   cursor: pointer;
   transition: all 0.15s;
   border: 1.5px solid transparent;
@@ -527,3 +530,22 @@ select.input {
 }
 .send-status.ok  { background: var(--accent-soft); color: var(--accent); }
 .send-status.err { background: var(--danger-soft); color: var(--danger); }
+
+/* ---------- Подсветка незаполненных обязательных полей ----------
+   Класс .field-invalid вешается на контейнер поля (.field / .gated-row)
+   только после нажатия «Дальше» с пустым обязательным полем. Снимается,
+   как только поле заполнено. */
+.field-invalid .input,
+.field-invalid .textarea,
+.field-invalid select.input {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px var(--danger-soft);
+}
+.field-invalid > label,
+.field-invalid .gated-row > label {
+  color: var(--danger);
+}
+.field-invalid .radio-row {
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 3px var(--danger-soft);
+}

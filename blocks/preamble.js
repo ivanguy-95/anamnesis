@@ -51,7 +51,7 @@ export function renderLevel(container, { onNext }) {
     <nav class="step-nav">
       <button class="btn-ghost" type="button" disabled>← Назад</button>
       <button class="btn-primary" id="next-btn" type="button"
-        ${meta.level ? '' : 'disabled'}>Дальше →</button>
+        ${meta.level ? '' : 'disabled'}>Дальше</button>
     </nav>
   `;
 
@@ -87,7 +87,7 @@ export function renderGoal(container, { onBack, onNext }) {
 
     <nav class="step-nav">
       <button class="btn-ghost"   id="back-btn" type="button">← Назад</button>
-      <button class="btn-primary" id="next-btn" type="button">Дальше →</button>
+      <button class="btn-primary" id="next-btn" type="button">Дальше</button>
     </nav>
   `;
 
