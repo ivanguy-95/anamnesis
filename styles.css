@@ -1,4 +1,47 @@
 /* ---------------------------------------------------------------------------
+   Шрифт NEXT ART (локальные файлы в /fonts).
+   Одно семейство, разные начертания по font-weight:
+     Light 300 · Regular 400 · SemiBold 600 · Bold 700 · Heavy 800.
+   Medium (500) отдельным файлом нет — браузер подставит Regular.
+   font-display: swap — текст виден сразу, без «прыжка» при загрузке шрифта.
+   --------------------------------------------------------------------------- */
+@font-face {
+  font-family: "NEXT ART";
+  src: url("fonts/NextArt-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NEXT ART";
+  src: url("fonts/NextArt-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NEXT ART";
+  src: url("fonts/NextArt-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NEXT ART";
+  src: url("fonts/NextArt-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NEXT ART";
+  src: url("fonts/NextArt-Heavy.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------------------------------------------------------------------------
    Дизайн-токены: нейтральная медицинская палитра.
    Меняются здесь — отражаются на всём приложении.
    --------------------------------------------------------------------------- */
@@ -26,8 +69,8 @@
   --radius-sm: 6px;
   --radius-pill: 40px;     /* закругление кнопок */
 
-  --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto,
-               "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "NEXT ART", -apple-system, BlinkMacSystemFont, "Inter",
+               "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 /* ---------- Reset ---------- */
