@@ -274,7 +274,7 @@ export function render(container, { onBack, onNext }) {
             <label class="radio">
               <input type="radio" name="wadaPassport" value="yes"
                 ${a.wadaPassport === 'yes' ? 'checked' : ''}>
-              Оформлен
+              Есть
             </label>
             <label class="radio">
               <input type="radio" name="wadaPassport" value="no"
