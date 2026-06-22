@@ -1,42 +1,15 @@
 /* ---------------------------------------------------------------------------
-   Шрифт NEXT ART (локальные файлы в /fonts).
-   Одно семейство, разные начертания по font-weight:
-     Light 300 · Regular 400 · SemiBold 600 · Bold 700 · Heavy 800.
-   Medium (500) отдельным файлом нет — браузер подставит Regular.
+   Шрифт Bounded (локальные файлы в /fonts).
+   Основной — вариативный файл: один @font-face покрывает весь диапазон весов
+   100–900, поэтому 400/500/600/700 из макета берутся из него «как есть».
+   Статичные ExtraLight/Regular/Black лежат рядом как запасной вариант для
+   браузеров без поддержки variable-шрифтов.
    font-display: swap — текст виден сразу, без «прыжка» при загрузке шрифта.
    --------------------------------------------------------------------------- */
 @font-face {
-  font-family: "NEXT ART";
-  src: url("fonts/NextArt-Light.otf") format("opentype");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "NEXT ART";
-  src: url("fonts/NextArt-Regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "NEXT ART";
-  src: url("fonts/NextArt-SemiBold.otf") format("opentype");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "NEXT ART";
-  src: url("fonts/NextArt-Bold.otf") format("opentype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "NEXT ART";
-  src: url("fonts/NextArt-Heavy.otf") format("opentype");
-  font-weight: 800;
+  font-family: "Bounded";
+  src: url("fonts/Bounded-Variable.ttf") format("truetype");
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -69,7 +42,7 @@
   --radius-sm: 6px;
   --radius-pill: 40px;     /* закругление кнопок */
 
-  --font-sans: "NEXT ART", -apple-system, BlinkMacSystemFont, "Inter",
+  --font-sans: "Bounded", -apple-system, BlinkMacSystemFont, "Inter",
                "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
