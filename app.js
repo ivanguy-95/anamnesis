@@ -10,6 +10,7 @@
    --------------------------------------------------------------------------- */
 
 import { loadProfile, getProfile } from './state.js';
+import { renderSectionNav } from './nav.js';
 import * as preamble  from './blocks/preamble.js';
 import * as identity  from './blocks/identity.js';
 import * as eventStep from './blocks/event.js';
@@ -22,19 +23,33 @@ import * as logistics from './blocks/logistics.js';
 import { sendToDoctor } from './report.js';
 
 const root = document.getElementById('app');
+const navHost = document.getElementById('section-nav');
 
 // Состояние навигации.
 let step = 'level';
 // 'level' | 'goal' | 'identity' | 'event' | 'medical' | 'endocrine'
 //  | 'nutrition' | 'sleep' | 'family' | 'logistics' | 'done'
 
+// Пройденные шаги — для бара разделов: на них можно прыгать назад/в текущий,
+// вперёд — только кнопкой «Дальше» (там валидация обязательных полей).
+const visited = new Set([step]);
+
 function go(nextStep) {
   step = nextStep;
+  visited.add(nextStep);
   render();
   window.scrollTo(0, 0);
 }
 
 function render() {
+  // Бар разделов отражает текущий шаг и доступные (пройденные) разделы.
+  renderSectionNav(navHost, {
+    current: step,
+    visited,
+    level: getProfile().meta.level,
+    onJump: target => { if (target !== step) go(target); }
+  });
+
   if (step === 'level') {
     preamble.renderLevel(root, {
       onNext: () => go('goal')
