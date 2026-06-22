@@ -198,11 +198,11 @@ export function render(container, { onBack, onNext }) {
       ${hasTue   ? gatedHtml(a, 'hasTueMeds',        'Препараты, назначенные по TUE', { placeholder: 'Что, в каких дозах, по какому диагнозу' }) : ''}
 
       ${gatedHtml(a, 'hasRecentlyStopped', 'Препараты, отменённые за последние 30 дней',
-        { placeholder: 'Препарат и причина отмены', yesLabel: 'Да', noLabel: 'Нет' })}
+        { placeholder: 'Препарат и причина отмены', yesLabel: 'Есть', noLabel: 'Нет' })}
     </section>
 
     <nav class="step-nav">
-      <button class="btn-ghost" id="back-btn" type="button">← Назад</button>
+      <button class="btn-ghost" id="back-btn" type="button">Назад</button>
       <button class="btn-primary" id="next-btn" type="button">Сохранить и продолжить</button>
     </nav>
   `;

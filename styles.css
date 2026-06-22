@@ -41,6 +41,7 @@
   --radius: 10px;
   --radius-sm: 6px;
   --radius-pill: 40px;     /* закругление кнопок */
+  --radius-input: 30px;    /* закругление полей ввода */
 
   --font-sans: "Bounded", -apple-system, BlinkMacSystemFont, "Inter",
                "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -153,9 +154,9 @@ body {
   width: 100%;
   font-family: inherit;
   font-size: 15px;
-  padding: 10px 12px;
+  padding: 10px 14px;
   border: 1px solid var(--line-strong);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-input);
   background: var(--bg);
   color: var(--text);
   transition: border-color 0.15s, box-shadow 0.15s;
@@ -385,6 +386,26 @@ select.input {
   font-size: 13px;
   color: var(--text-2);
   padding: 6px 0;
+}
+/* Нативная кнопка «Выбор файла» — в фирменном стиле: шрифт документа,
+   синий цвет, скругление 30. Дублируем -webkit- для старых Safari. */
+.file-input::file-selector-button,
+.file-input::-webkit-file-upload-button {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border: 0;
+  border-radius: 30px;
+  padding: 9px 18px;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.file-input::file-selector-button:hover,
+.file-input::-webkit-file-upload-button:hover {
+  background: var(--accent-hover);
 }
 .file-status {
   margin-top: 6px;
