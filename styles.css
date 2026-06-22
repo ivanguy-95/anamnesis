@@ -865,8 +865,11 @@ select.input {
   .form-section { margin: 22px 0; }
   .form-section-title { font-size: 16px; }
 
-  /* Поля в ряд: гарантированно помещаются по два на узком экране */
-  .field { min-width: 120px; }
+  /* Поля «в ряд» на телефоне складываем в столбец: при разной высоте подписей
+     (когда одна переносится на 2 строки, другая на 3) окна ввода не разъезжаются
+     по вертикали — каждое поле идёт на своей строке под предыдущим. */
+  .field-row { flex-direction: column; gap: 0; }
+  .field { min-width: 0; }
 
   /* Кнопки навигации компактнее, чтобы «Назад» + «Сохранить и продолжить»
      помещались в один ряд без переноса */
@@ -883,10 +886,6 @@ select.input {
 @media (max-width: 360px) {
   #app { padding: 18px 12px 64px; }
   .step-title { font-size: 20px; }
-
-  /* На самых узких экранах поля выстраиваем в один столбец */
-  .field { min-width: 100%; }
-  .field-row { gap: 8px; }
 
   .btn-primary, .btn-ghost { font-size: 13px; padding: 10px 14px; }
 
