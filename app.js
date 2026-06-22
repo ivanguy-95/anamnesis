@@ -75,7 +75,7 @@ function render() {
     current: step,
     visited,
     level: getProfile().meta.level,
-    onJump: target => { if (target !== step) go(target); }
+    onJump: target => { if (target !== step) go(target); closeMenu(); }
   });
 
   if (step === 'level') {
@@ -177,6 +177,45 @@ function renderDone() {
   });
 }
 
+// ----- Брендинг и бургер-меню -------------------------------------------
+// Логотип: пробуем форматы по очереди (svg→png→jpg→webp), иначе прячем блок.
+function setupBrand() {
+  const logo = document.getElementById('brand-logo');
+  if (!logo) return;
+  const candidates = ['assets/logo.svg', 'assets/logo.png', 'assets/logo.jpg', 'assets/logo.webp'];
+  let i = 0;
+  logo.addEventListener('error', () => {
+    i += 1;
+    if (i < candidates.length) {
+      logo.src = candidates[i];
+    } else {
+      const brand = logo.closest('.brand');
+      if (brand) brand.style.display = 'none';
+    }
+  });
+  logo.src = candidates[0];
+}
+
+// Меню-бургер (телефон): открытие/закрытие выезжающего меню разделов.
+function setMenu(open) {
+  document.body.classList.toggle('nav-open', open);
+  const t = document.getElementById('nav-toggle');
+  if (t) t.setAttribute('aria-expanded', String(open));
+}
+function closeMenu() { setMenu(false); }
+function setupMenu() {
+  const toggle = document.getElementById('nav-toggle');
+  const overlay = document.getElementById('nav-overlay');
+  if (toggle) {
+    toggle.addEventListener('click', () =>
+      setMenu(!document.body.classList.contains('nav-open')));
+  }
+  if (overlay) overlay.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+}
+
+setupBrand();
+setupMenu();
 loadProfile();
 restoreProgress();
 render();

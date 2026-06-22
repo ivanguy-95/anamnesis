@@ -124,7 +124,24 @@ body {
   cursor: not-allowed;
 }
 
-/* Телефон: горизонтальная липкая полоса сверху со скроллом вбок. */
+/* ---------- Шапка: логотип (слева) + бургер (на телефоне, справа) ---------- */
+#app-header {
+  max-width: 812px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 16px 0;
+}
+.brand { display: flex; align-items: center; }
+.brand img { height: 36px; width: auto; display: block; }
+#nav-toggle { display: none; }   /* десктоп: бургер не нужен — есть боковой бар */
+#nav-overlay { display: none; }  /* затемнение только на телефоне */
+.nav-label { display: none; }    /* на десктопе у иконок-кнопок подписи скрыты */
+
+/* Телефон: боковой бар превращается в выезжающее справа меню-drawer,
+   а в шапке появляется кнопка-бургер. Логотип остаётся слева сверху. */
 @media (max-width: 800px) {
   #layout {
     flex-direction: column;
@@ -132,29 +149,90 @@ body {
     padding: 0;
     max-width: 720px;
   }
-  #section-nav {
+  #app { padding: 20px 20px 80px; }
+
+  /* Шапка липнет к верху; логотип слева, бургер справа */
+  #app-header {
     position: sticky;
     top: 0;
-    margin-top: 0;
-    z-index: 50;
-    flex-direction: row;
-    width: 100%;
-    border: 0;
+    z-index: 80;
+    max-width: none;
+    padding: 10px 14px;
+    background: #fff;
     border-bottom: 1px solid var(--line);
-    border-radius: 0;
-    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
-    background: linear-gradient(90deg, var(--accent-light-soft), #ffffff);
-    padding: 8px 10px;
-    gap: 6px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
   }
-  #section-nav::-webkit-scrollbar { display: none; }
-  .nav-item { width: 40px; height: 40px; }
-  .nav-item svg { width: 20px; height: 20px; }
-  #app { padding: 24px 20px 80px; }
+  .brand img { height: 30px; }
+  #nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--text);
+    cursor: pointer;
+  }
+  #nav-toggle svg { width: 22px; height: 22px; }
+
+  /* Меню-drawer */
+  #section-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 264px;
+    max-width: 82vw;
+    margin-top: 0;
+    z-index: 70;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 70px 12px 24px;
+    border: 0;
+    border-radius: 0;
+    background: #fff;
+    box-shadow: -14px 0 36px rgba(15, 23, 42, 0.18);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.26s ease;
+  }
+  body.nav-open #section-nav { transform: translateX(0); }
+
+  /* Пункты меню: иконка + подпись во всю ширину */
+  .nav-item {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    justify-content: flex-start;
+    gap: 14px;
+    padding: 12px 14px;
+  }
+  .nav-item svg { width: 22px; height: 22px; }
+  .nav-label {
+    display: inline;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .nav-item.locked { opacity: 0.4; }
+
+  /* Затемнение под выезжающим меню */
+  #nav-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 65;
+    background: rgba(15, 23, 42, 0.38);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+  }
+  body.nav-open #nav-overlay { opacity: 1; visibility: visible; }
+  body.nav-open { overflow: hidden; }
 }
 
 /* ---------- Шапка шага ---------- */

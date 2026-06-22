@@ -9,13 +9,28 @@
 </head>
 
 <body>
-  <!-- Лейаут: слева бар разделов (вертикальный на десктопе, горизонтальная
-       полоса сверху на телефоне), справа — текущий блок анкеты. Оба контейнера
-       монтируются из app.js в зависимости от состояния опросника. -->
+  <!-- Шапка: логотип слева; на телефоне справа — кнопка-бургер, открывающая
+       меню разделов. Логотип берётся из assets/logo.* (см. assets/README.md). -->
+  <header id="app-header">
+    <div class="brand">
+      <img id="brand-logo" alt="Логотип">
+    </div>
+    <button id="nav-toggle" type="button" aria-label="Меню разделов" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </header>
+
+  <!-- Лейаут: слева бар разделов (вертикальный на десктопе; на телефоне —
+       выезжающее справа меню-drawer), справа — текущий блок анкеты. Оба
+       контейнера монтируются из app.js в зависимости от состояния опросника. -->
   <div id="layout">
     <nav id="section-nav" aria-label="Разделы анкеты"></nav>
     <main id="app"></main>
   </div>
+
+  <!-- Затемнение под выезжающее меню (только на телефоне). -->
+  <div id="nav-overlay"></div>
 
   <script type="module" src="app.js"></script>
 </body>

@@ -56,6 +56,7 @@ export function renderSectionNav(host, { current, visited, level, onJump }) {
         title="${s.label}" aria-label="${s.label}" ${unlocked ? '' : 'disabled'}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[s.icon]}</svg>
+        <span class="nav-label">${s.label}</span>
       </button>`;
   }).join('');
 
