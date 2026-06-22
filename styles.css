@@ -988,11 +988,26 @@ select.input {
   .dp-popup { padding: 12px; }
 }
 
-/* Очень короткие экраны в ландшафте — уменьшаем вертикальные отступы,
-   чтобы шапка и навигация не съедали высоту. */
-@media (max-height: 460px) and (orientation: landscape) {
+/* Крупные высокоплотные телефоны в портрете (~6.5", ширина ≈ 412–480 CSS-px;
+   напр. 2736×1264 при DPR 3 → ~421px). На большом экране возвращаем базовый
+   кегль и даём чуть больше воздуха по бокам. */
+@media (min-width: 412px) and (max-width: 480px) {
+  body { font-size: 15px; }
+  #app { padding-left: 22px; padding-right: 22px; }
+}
+
+/* Низкие по высоте экраны в ландшафте (тот же телефон повёрнут: ~912×421).
+   Ширина >800 → показывается десктопный боковой бар, но по высоте он не
+   помещается: даём ему внутренний скролл и поджимаем вертикальные отступы. */
+@media (orientation: landscape) and (max-height: 500px) {
   #app { padding-top: 14px; padding-bottom: 48px; }
-  .step-header { margin-bottom: 14px; }
+  .step-header { margin-bottom: 14px; padding-bottom: 12px; }
+  #section-nav {
+    max-height: calc(100vh - 36px);
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  #section-nav::-webkit-scrollbar { display: none; }
 }
 
 /* ---------- Переключатель-ползунок «Да/Нет» (toggle.js) ----------
