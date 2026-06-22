@@ -69,6 +69,8 @@ function openPopup(input) {
   let view = selected || today;
   let viewYear = view.getFullYear();
   let viewMonth = view.getMonth();
+  let mode = 'days';        // 'days' — сетка дней; 'years' — выбор года
+  let yearStart = 0;        // верхний год текущей страницы выбора года
 
   const backdrop = document.createElement('div');
   backdrop.className = 'dp-backdrop';
@@ -90,16 +92,23 @@ function openPopup(input) {
   }
 
   function render() {
+    if (mode === 'years') return renderYears();
+
     el.innerHTML = `
       <div class="dp-header">
         <button type="button" class="dp-nav" data-nav="-1" aria-label="Предыдущий месяц">‹</button>
-        <div class="dp-title">${MONTHS[viewMonth]} ${viewYear}</div>
+        <button type="button" class="dp-title" data-title aria-label="Выбрать год">${MONTHS[viewMonth]} ${viewYear}</button>
         <button type="button" class="dp-nav" data-nav="1" aria-label="Следующий месяц">›</button>
       </div>
       <div class="dp-weekdays">${WEEKDAYS.map(w => `<span>${w}</span>`).join('')}</div>
       <div class="dp-grid">${cellsHtml()}</div>
     `;
 
+    el.querySelector('[data-title]').addEventListener('click', () => {
+      mode = 'years';
+      yearStart = viewYear - (((viewYear % 12) + 12) % 12);   // страница из 12 лет
+      render();
+    });
     el.querySelectorAll('.dp-nav').forEach(btn =>
       btn.addEventListener('click', () => {
         viewMonth += Number(btn.dataset.nav);
@@ -108,11 +117,45 @@ function openPopup(input) {
         render();
       })
     );
-    el.querySelectorAll('.dp-cell:not(.dp-empty)').forEach(cell =>
+    el.querySelectorAll('.dp-cell').forEach(cell =>
       cell.addEventListener('click', () =>
         selectDate(new Date(Number(cell.dataset.y), Number(cell.dataset.m), Number(cell.dataset.d)))
       )
     );
+    position(el, input);
+  }
+
+  // Экран выбора года: сетка 12 лет с листанием по страницам.
+  function renderYears() {
+    let cells = '';
+    for (let y = yearStart; y < yearStart + 12; y++) {
+      const cls = [
+        'dp-year',
+        y === today.getFullYear() ? 'dp-today' : '',
+        y === viewYear ? 'dp-selected' : ''
+      ].filter(Boolean).join(' ');
+      cells += `<button type="button" class="${cls}" data-year="${y}">${y}</button>`;
+    }
+    el.innerHTML = `
+      <div class="dp-header">
+        <button type="button" class="dp-nav" data-yearnav="-1" aria-label="Предыдущие годы">‹</button>
+        <div class="dp-range">${yearStart} – ${yearStart + 11}</div>
+        <button type="button" class="dp-nav" data-yearnav="1" aria-label="Следующие годы">›</button>
+      </div>
+      <div class="dp-years">${cells}</div>
+    `;
+
+    el.querySelectorAll('[data-yearnav]').forEach(btn =>
+      btn.addEventListener('click', () => { yearStart += 12 * Number(btn.dataset.yearnav); render(); })
+    );
+    el.querySelectorAll('.dp-year').forEach(btn =>
+      btn.addEventListener('click', () => {
+        viewYear = Number(btn.dataset.year);
+        mode = 'days';
+        render();
+      })
+    );
+    position(el, input);
   }
 
   function cellsHtml() {
@@ -137,8 +180,7 @@ function openPopup(input) {
     return html;
   }
 
-  render();
-  position(el, input);
+  render();   // render() сам вызывает position(el, input) в конце
   window.addEventListener('resize', closePopup);
   window.addEventListener('scroll', closePopup, true);
 }
