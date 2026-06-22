@@ -184,6 +184,18 @@ select.input {
   padding-right: 30px;
 }
 
+/* Поле-дата (кастомный календарь): не выглядит как disabled,
+   курсор-указатель и иконка календаря справа. */
+.input[data-datepicker] {
+  cursor: pointer;
+  background: var(--bg);
+  color: var(--text);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23347AE9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cpath d='M16 2v4M8 2v4M3 10h18'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 42px;
+}
+
 /* ---------- Radio ---------- */
 .radio-row {
   display: flex;
@@ -585,4 +597,103 @@ select.input {
 .field-invalid .radio-row {
   border-radius: var(--radius-sm);
   box-shadow: 0 0 0 3px var(--danger-soft);
+}
+
+/* ---------- Кастомный календарь (datepicker.js) ----------
+   Дизайн с референса (скруглённая карточка, кружок выделения, круглые
+   стрелки), палитра — наша (белый фон, синий акцент). */
+.dp-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+}
+.dp-popup {
+  position: absolute;
+  z-index: 1001;
+  width: 300px;
+  padding: 16px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16);
+  user-select: none;
+}
+.dp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.dp-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+.dp-nav {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--text-2);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.dp-nav:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.dp-weekdays,
+.dp-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.dp-weekdays {
+  margin-bottom: 6px;
+}
+.dp-weekdays span {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-3);
+  padding: 4px 0;
+}
+.dp-cell {
+  aspect-ratio: 1 / 1;
+  border: 0;
+  background: transparent;
+  border-radius: 50%;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, color 0.12s;
+}
+.dp-cell:hover {
+  background: var(--accent-soft);
+}
+.dp-cell.dp-muted {
+  color: var(--text-3);
+}
+.dp-cell.dp-today {
+  box-shadow: inset 0 0 0 1.5px var(--line-strong);
+}
+.dp-cell.dp-selected,
+.dp-cell.dp-selected:hover {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: none;
 }

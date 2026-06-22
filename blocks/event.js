@@ -17,6 +17,7 @@
 
 import { getProfile, setAnswer } from '../state.js';
 import { validateRequired } from '../validate.js';
+import { initDatePickers } from '../datepicker.js';
 
 const BLOCK_ID = 'event';
 
@@ -85,7 +86,7 @@ export function render(container, { onBack, onNext }) {
       <div class="field-row">
         <div class="field">
           <label for="raceDate">Дата старта <span class="req">*</span></label>
-          <input id="raceDate" class="input" type="date" value="${esc(a.raceDate)}">
+          <input id="raceDate" class="input" type="text" data-datepicker readonly value="${esc(a.raceDate)}">
         </div>
         <div class="field">
           <label for="raceFormat">Формат <span class="req">*</span></label>
@@ -183,11 +184,11 @@ export function render(container, { onBack, onNext }) {
         <div class="field-row">
           <div class="field">
             <label for="lastPeakDate">Дата последнего пика нагрузок</label>
-            <input id="lastPeakDate" class="input" type="date" value="${esc(a.lastPeakDate)}">
+            <input id="lastPeakDate" class="input" type="text" data-datepicker readonly value="${esc(a.lastPeakDate)}">
           </div>
           <div class="field">
             <label for="taperDate">Дата начала тейпера</label>
-            <input id="taperDate" class="input" type="date" value="${esc(a.taperDate)}">
+            <input id="taperDate" class="input" type="text" data-datepicker readonly value="${esc(a.taperDate)}">
           </div>
         </div>
       `}
@@ -256,6 +257,9 @@ export function render(container, { onBack, onNext }) {
     </nav>
   `;
 
+  // Кастомный календарь для полей-дат (raceDate, lastPeakDate, taperDate).
+  initDatePickers(container);
+
   // ---------- Автоподсчёт «Недель до старта» ----------
   // Считаем разницу race_date − today в неделях, округляя в большую сторону.
   // НЕ перетираем ручной ввод: если пользователь сам поставил число — уважаем.
@@ -264,7 +268,7 @@ export function render(container, { onBack, onNext }) {
   function maybeAutoWeeks() {
     if (weeksEl.value !== '') return;
     if (!raceDateEl.value) return;
-    const target = new Date(raceDateEl.value);
+    const target = new Date(raceDateEl.dataset.iso || raceDateEl.value);
     if (isNaN(target.getTime())) return;
     const diffMs = target - new Date();
     const weeks = Math.max(0, Math.round(diffMs / (1000 * 60 * 60 * 24 * 7)));

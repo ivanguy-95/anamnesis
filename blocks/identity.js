@@ -19,6 +19,7 @@
 
 import { getProfile, setAnswer } from '../state.js';
 import { validateRequired } from '../validate.js';
+import { initDatePickers } from '../datepicker.js';
 
 const BLOCK_ID = 'identity';
 
@@ -110,7 +111,7 @@ export function render(container, { onBack, onNext }) {
 
       <div class="field">
         <label for="birthDate">Дата рождения <span class="req">*</span></label>
-        <input id="birthDate" class="input" type="date" value="${esc(a.birthDate)}">
+        <input id="birthDate" class="input" type="text" data-datepicker readonly value="${esc(a.birthDate)}">
         <div class="field-help">Полная дата нужна для расчёта биологического возраста</div>
       </div>
 
@@ -238,7 +239,7 @@ export function render(container, { onBack, onNext }) {
           </div>
           <div class="field">
             <label for="bodyCompDate">Дата последнего измерения</label>
-            <input id="bodyCompDate" class="input" type="date" value="${esc(a.bodyCompDate)}">
+            <input id="bodyCompDate" class="input" type="text" data-datepicker readonly value="${esc(a.bodyCompDate)}">
           </div>
         </div>
       ` : ''}
@@ -333,6 +334,9 @@ export function render(container, { onBack, onNext }) {
       <button class="btn-primary" id="next-btn" type="button">Сохранить и продолжить</button>
     </nav>
   `;
+
+  // Кастомный календарь для полей-дат (birthDate, bodyCompDate).
+  initDatePickers(container);
 
   // ---------- Автоматический расчёт ИМТ ----------
   // ИМТ = масса (кг) / рост² (м). Пересчитываем при любом изменении
