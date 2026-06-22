@@ -34,12 +34,12 @@ export function render(container, { onBack, onNext }) {
 
       <div class="field-row">
         <div class="field">
-          <label for="sleepDurationNormal">Длительность сна до тренировки, ч</label>
+          <label for="sleepDurationNormal">Длительность сна до тренировки, ч <span class="req">*</span></label>
           <input id="sleepDurationNormal" class="input" type="number"
             min="0" max="14" step="0.5" value="${a.sleepDurationNormal ?? ''}">
         </div>
         <div class="field">
-          <label for="sleepDurationBeforeHard">Длительность сна после тренировки, ч</label>
+          <label for="sleepDurationBeforeHard">Длительность сна после тренировки, ч <span class="req">*</span></label>
           <input id="sleepDurationBeforeHard" class="input" type="number"
             min="0" max="14" step="0.5" value="${a.sleepDurationBeforeHard ?? ''}">
         </div>
@@ -47,17 +47,17 @@ export function render(container, { onBack, onNext }) {
 
       <div class="field-row">
         <div class="field">
-          <label for="bedtime">Время отхода ко сну</label>
+          <label for="bedtime">Время отхода ко сну <span class="req">*</span></label>
           <input id="bedtime" class="input" type="time" value="${esc(a.bedtime)}">
         </div>
         <div class="field">
-          <label for="wakeupTime">Время пробуждения</label>
+          <label for="wakeupTime">Время пробуждения <span class="req">*</span></label>
           <input id="wakeupTime" class="input" type="time" value="${esc(a.wakeupTime)}">
         </div>
       </div>
 
       <div class="field">
-        <label for="sleepQuality">Качество сна по субъективной шкале 1–10</label>
+        <label for="sleepQuality">Качество сна по субъективной шкале 1–10 <span class="req">*</span></label>
         <input id="sleepQuality" class="input" type="number"
           min="1" max="10" step="1" value="${a.sleepQuality ?? ''}">
       </div>
@@ -65,17 +65,17 @@ export function render(container, { onBack, onNext }) {
       <div class="disease-group">
         ${gatedHtml(a, 'hasInsomnia', 'Эпизоды бессонницы', {
           detailLabel: 'Частота и причины',
-          placeholder: 'Например: 2–3 раза в неделю; стресс / перелёты / препараты'
+          placeholder: 'Например: 2–3 раза в неделю; стресс / перелёты / препараты', required: true
         })}
         ${gatedHtml(a, 'usesMelatonin', 'Принимаете мелатонин?', {
           yesLabel: 'Да', noLabel: 'Нет',
           detailLabel: 'Дозировка и частота',
-          placeholder: 'Например: 3 мг за 30 мин до сна, 2–3 раза в неделю'
+          placeholder: 'Например: 3 мг за 30 мин до сна, 2–3 раза в неделю', required: true
         })}
         ${gatedHtml(a, 'hasSleepApnea', 'Жалобы на ночное апноэ', {
           abbrFull: 'остановки дыхания во сне',
           detailLabel: 'Какие жалобы',
-          placeholder: 'Храп, остановки дыхания, дневная сонливость'
+          placeholder: 'Храп, остановки дыхания, дневная сонливость', required: true
         })}
       </div>
     </section>
@@ -94,22 +94,22 @@ export function render(container, { onBack, onNext }) {
         ${gatedHtml(a, 'hadDepression', 'Эпизоды депрессии', {
           yesLabel: 'Было', noLabel: 'Не было',
           detailLabel: 'Когда и как долго',
-          placeholder: 'Период, обстоятельства, обращались ли к специалисту'
+          placeholder: 'Период, обстоятельства, обращались ли к специалисту', required: true
         })}
         ${gatedHtml(a, 'hadBurnout', 'Эпизоды выгорания', {
           yesLabel: 'Было', noLabel: 'Не было',
           detailLabel: 'Когда и как долго',
-          placeholder: 'Период, обстоятельства'
+          placeholder: 'Период, обстоятельства', required: true
         })}
         ${gatedHtml(a, 'worksWithPsychologist', 'Работаете с психологом / спортивным психологом?', {
           yesLabel: 'Да', noLabel: 'Нет',
           detailLabel: 'С каким специалистом и как часто',
-          placeholder: 'Например: со спортивным психологом 1 раз в 2 недели'
+          placeholder: 'Например: со спортивным психологом 1 раз в 2 недели', required: true
         })}
         ${gatedHtml(a, 'takesAntidepressants', 'Принимаете антидепрессанты или анксиолитики?', {
           yesLabel: 'Да', noLabel: 'Нет',
           detailLabel: 'Препараты и дозы',
-          placeholder: 'Название, дозировка, длительность приёма'
+          placeholder: 'Название, дозировка, длительность приёма', required: true
         })}
       </div>
     </section>
@@ -127,23 +127,23 @@ export function render(container, { onBack, onNext }) {
             abbrFull: 'вариабельность сердечного ритма — маркер восстановления',
             yesLabel: 'Да', noLabel: 'Нет',
             detailLabel: 'Устройство и тренды за 30 дней',
-            placeholder: 'Например: часы Garmin / Whoop; средний RMSSD, динамика'
+            placeholder: 'Например: часы Garmin / Whoop; средний RMSSD, динамика', required: true
           })}
           ${gatedHtml(a, 'tracksMorningPulse', 'Отслеживаете утренний пульс натощак?', {
             yesLabel: 'Да', noLabel: 'Нет',
             detailLabel: 'Динамика',
-            placeholder: 'Обычные значения и недавние отклонения'
+            placeholder: 'Обычные значения и недавние отклонения', required: true
           })}
           ${gatedHtml(a, 'tracksRecoveryScale', 'Регулярно фиксируете шкалу восстановления (Hooper / Borg / RPE)?', {
             abbrFull: 'субъективные шкалы оценки восстановления и нагрузки',
             yesLabel: 'Да', noLabel: 'Нет',
             detailLabel: 'Какую шкалу и как часто',
-            placeholder: 'Например: Hooper после каждой тренировки, RPE после тяжёлых сессий'
+            placeholder: 'Например: Hooper после каждой тренировки, RPE после тяжёлых сессий', required: true
           })}
 
-          ${simpleRadioHtml(a, 'hasMotivationLoss',    'Упало желание тренироваться?',                                'Есть', 'Нет')}
-          ${simpleRadioHtml(a, 'hasPerformanceDecline', 'Снижение работоспособности на тех же нагрузках за 4–8 недель?', 'Есть', 'Нет')}
-          ${simpleRadioHtml(a, 'hasFrequentInfections', 'Частые простуды (≥3 ОРВИ за последние 6 мес)?',               'Есть', 'Нет')}
+          ${simpleRadioHtml(a, 'hasMotivationLoss',    'Упало желание тренироваться?',                                'Есть', 'Нет', true)}
+          ${simpleRadioHtml(a, 'hasPerformanceDecline', 'Снижение работоспособности на тех же нагрузках за 4–8 недель?', 'Есть', 'Нет', true)}
+          ${simpleRadioHtml(a, 'hasFrequentInfections', 'Частые простуды (≥3 ОРВИ за последние 6 мес)?',               'Есть', 'Нет', true)}
         </div>
       </section>
     `}
@@ -156,14 +156,14 @@ export function render(container, { onBack, onNext }) {
         ${gatedHtml(a, 'smokes', 'Курите', {
           yesLabel: 'Да', noLabel: 'Нет',
           detailLabel: 'Что и как часто',
-          placeholder: 'Например: сигареты — 5 шт/день; вейп ежедневно; кальян 1–2 раза в месяц'
+          placeholder: 'Например: сигареты — 5 шт/день; вейп ежедневно; кальян 1–2 раза в месяц', required: true
         })}
 
         <!-- Алкоголь: при «Да» раскрывается detail + вложенный вопрос
              «Были запойные эпизоды?». При «Нет» — оба прячутся и чистятся. -->
         <div class="gated-item">
           <div class="gated-row">
-            <label>Употребляете алкоголь</label>
+            <label>Употребляете алкоголь <span class="req">*</span></label>
             <div class="radio-row">
               <label class="radio">
                 <input type="radio" name="drinksAlcohol" value="yes"
@@ -187,7 +187,7 @@ export function render(container, { onBack, onNext }) {
             <div style="margin-top:12px">
               ${gatedHtml(a, 'hadBingeDrinking', 'Были запойные эпизоды?', {
                 yesLabel: 'Да', noLabel: 'Нет',
-                detailLabel: 'Когда и в каких обстоятельствах'
+                detailLabel: 'Когда и в каких обстоятельствах', required: true
               })}
             </div>
           </div>
@@ -196,13 +196,13 @@ export function render(container, { onBack, onNext }) {
         ${gatedHtml(a, 'usesCaffeine', 'Потребляете кофеин', {
           yesLabel: 'Да', noLabel: 'Нет',
           detailLabel: 'Суточная доза и источники',
-          placeholder: 'Например: 2 чашки кофе + предтренировочный комплекс — около 300 мг/сут'
+          placeholder: 'Например: 2 чашки кофе + предтренировочный комплекс — около 300 мг/сут', required: true
         })}
         ${gatedHtml(a, 'usesRecreationalSubstances', 'Употребляете рекреационные вещества', {
           abbrFull: 'каннабиноиды, кокаин, амфетамины — запрещены WADA in-competition',
           yesLabel: 'Да', noLabel: 'Нет',
           detailLabel: 'Что и как часто',
-          placeholder: 'Что именно и периодичность. Важно для WADA-комплаенса'
+          placeholder: 'Что именно и периодичность. Важно для WADA-комплаенса', required: true
         })}
       </div>
     </section>
@@ -341,11 +341,12 @@ function bindGated(container, key) {
   });
 }
 
-function simpleRadioHtml(a, key, label, yesLabel = 'Да', noLabel = 'Нет') {
+function simpleRadioHtml(a, key, label, yesLabel = 'Да', noLabel = 'Нет', required = false) {
+  const req = required ? ' <span class="req">*</span>' : '';
   return `
     <div class="gated-item">
       <div class="gated-row">
-        <label>${esc(label)}</label>
+        <label>${esc(label)}${req}</label>
         <div class="radio-row">
           <label class="radio">
             <input type="radio" name="${key}" value="yes" ${a[key] === 'yes' ? 'checked' : ''}>

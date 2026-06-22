@@ -62,7 +62,7 @@ export function render(container, { onBack, onNext }) {
       <h2 class="form-section-title">5.1 Текущий рацион</h2>
 
       <div class="field">
-        <label for="dietType">Тип питания</label>
+        <label for="dietType">Тип питания <span class="req">*</span></label>
         <select id="dietType" class="input">${optionsHtml(DIET_OPTIONS, a.dietType)}</select>
       </div>
 
@@ -84,7 +84,7 @@ export function render(container, { onBack, onNext }) {
 
       <div class="field-row">
         <div class="field">
-          <label for="mealsPerDay">Число приёмов пищи в день</label>
+          <label for="mealsPerDay">Число приёмов пищи в день <span class="req">*</span></label>
           <input id="mealsPerDay" class="input" type="number" min="1" max="10"
             value="${a.mealsPerDay ?? ''}">
         </div>
@@ -96,7 +96,7 @@ export function render(container, { onBack, onNext }) {
       </div>
 
       <div class="field">
-        <label>Завтракаете каждый день?</label>
+        <label>Завтракаете каждый день? <span class="req">*</span></label>
         <div class="radio-row">
           <label class="radio">
             <input type="radio" name="hasBreakfast" value="yes"
@@ -155,11 +155,13 @@ export function render(container, { onBack, onNext }) {
         ${gatedHtml(a, 'usesElectrolytes', 'Используете изотоники, соли, электролиты?', {
           yesLabel: 'Да', noLabel: 'Нет',
           detailLabel: 'Что именно, дозы',
-          placeholder: 'Название, состав, дозировка, частота'
+          placeholder: 'Название, состав, дозировка, частота',
+          required: true
         })}
         ${gatedHtml(a, 'hasWeightLossTracking', 'Измеряете потерю массы за тренировку?', {
           detailLabel: 'Сколько кг в среднем и в каких условиях',
-          placeholder: 'Например: 0,8 кг за полуторачасовую тренировку в жару'
+          placeholder: 'Например: 0,8 кг за полуторачасовую тренировку в жару',
+          required: true
         })}
       </div>
     </section>
@@ -171,29 +173,35 @@ export function render(container, { onBack, onNext }) {
       <div class="disease-group">
         ${gatedHtml(a, 'hasCalorieRestriction', 'Сознательное ограничение калорий', {
           detailLabel: 'Когда и как',
-          placeholder: 'Постоянное ограничение, целевые цифры дефицита'
+          placeholder: 'Постоянное ограничение, целевые цифры дефицита',
+          required: true
         })}
         ${gatedHtml(a, 'hasDryingPeriods', 'Сезонные «сушки»', {
           detailLabel: 'Когда и как',
-          placeholder: 'Перед стартами, циклически, длительность'
+          placeholder: 'Перед стартами, циклически, длительность',
+          required: true
         })}
         ${gatedHtml(a, 'hasWeightSwings', 'Скачки массы между сезонами', {
           detailLabel: 'Диапазон колебаний',
-          placeholder: 'Например: ±5–7 кг между сезоном и межсезоньем'
+          placeholder: 'Например: ±5–7 кг между сезоном и межсезоньем',
+          required: true
         })}
         ${gatedHtml(a, 'hasFuelLowFeelings', 'Ощущение нехватки энергии на тренировке', {
           detailLabel: 'Когда возникает',
-          placeholder: 'На каких тренировках, в какое время — например, во второй половине длинных тренировок'
+          placeholder: 'На каких тренировках, в какое время — например, во второй половине длинных тренировок',
+          required: true
         })}
         ${gatedHtml(a, 'hasDizziness', 'Головокружения', {
           detailLabel: 'Когда и при каких обстоятельствах',
-          placeholder: 'На тренировке, после еды, при низкой глюкозе и т.п.'
+          placeholder: 'На тренировке, после еды, при низкой глюкозе и т.п.',
+          required: true
         })}
         ${!isAmateur ? gatedHtml(a, 'hasScreeningQuestionnaires', 'Заполняли LEAF-Q или LEAM-Q?', {
           abbrFull: 'опросники-скрининги низкой энергодоступности — для женщин (LEAF-Q) и мужчин (LEAM-Q)',
           yesLabel: 'Да', noLabel: 'Нет',
           detailLabel: 'Балл и интерпретация',
-          placeholder: 'Если знаете результат — укажите'
+          placeholder: 'Если знаете результат — укажите',
+          required: true
         }) : ''}
       </div>
     </section>

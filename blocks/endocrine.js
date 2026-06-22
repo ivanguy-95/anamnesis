@@ -37,8 +37,8 @@ export function render(container, { onBack, onNext }) {
 
     ${isFemale ? femaleSectionHtml(a) : ''}
     ${isMale   ? maleSectionHtml(a)   : ''}
-    ${boneSectionHtml(a)}
     ${symptomsSectionHtml(a)}
+    ${boneSectionHtml(a)}
 
     <nav class="step-nav">
       <button class="btn-ghost" id="back-btn" type="button">Назад</button>
@@ -103,37 +103,38 @@ function femaleSectionHtml(a) {
 
       <div class="field-row">
         <div class="field">
-          <label for="menarcheAge">Возраст менархе, лет</label>
+          <label for="menarcheAge">Возраст менархе, лет <span class="req">*</span></label>
           <input id="menarcheAge" class="input" type="number" min="8" max="25"
             value="${a.menarcheAge ?? ''}">
         </div>
         <div class="field">
-          <label for="cycleLength">Средняя длина цикла, дней</label>
+          <label for="cycleLength">Средняя длина цикла, дней <span class="req">*</span></label>
           <input id="cycleLength" class="input" type="number" min="15" max="60"
             value="${a.cycleLength ?? ''}">
         </div>
         <div class="field">
-          <label for="cyclesPerYear">Циклов в год</label>
+          <label for="cyclesPerYear">Циклов в год <span class="req">*</span></label>
           <input id="cyclesPerYear" class="input" type="number" min="0" max="13"
             value="${a.cyclesPerYear ?? ''}">
         </div>
       </div>
 
       <div class="disease-group">
-        ${gatedHtml(a, 'hasOligomenorrhea',    'Олигоменорея',         { abbrFull: 'циклы >35 дней или <9 циклов/год' })}
-        ${gatedHtml(a, 'hasAmenorrhea',        'Аменорея',             { abbrFull: 'отсутствие менструаций >90 дней' })}
-        ${gatedHtml(a, 'hasPrimaryAmenorrhea', 'Первичная аменорея',   { abbrFull: 'менархе не наступило до 15 лет' })}
-        ${gatedHtml(a, 'hasPms',               'ПМС',                  { abbrFull: 'предменструальный синдром', detailLabel: 'Как влияет на тренировки и старты' })}
-        ${gatedHtml(a, 'hasDysmenorrhea',      'Дисменорея',           { abbrFull: 'болезненные менструации', detailLabel: 'Как влияет на тренировки и старты' })}
+        ${gatedHtml(a, 'hasOligomenorrhea',    'Олигоменорея',         { abbrFull: 'циклы >35 дней или <9 циклов/год', required: true })}
+        ${gatedHtml(a, 'hasAmenorrhea',        'Аменорея',             { abbrFull: 'отсутствие менструаций >90 дней', required: true })}
+        ${gatedHtml(a, 'hasPrimaryAmenorrhea', 'Первичная аменорея',   { abbrFull: 'менархе не наступило до 15 лет', required: true })}
+        ${gatedHtml(a, 'hasPms',               'ПМС',                  { abbrFull: 'предменструальный синдром', detailLabel: 'Как влияет на тренировки и старты', required: true })}
+        ${gatedHtml(a, 'hasDysmenorrhea',      'Дисменорея',           { abbrFull: 'болезненные менструации', detailLabel: 'Как влияет на тренировки и старты', required: true })}
 
-        ${simpleRadioHtml(a, 'hasCurrentPregnancy', 'Текущая беременность', 'Есть', 'Нет')}
+        ${simpleRadioHtml(a, 'hasCurrentPregnancy', 'Текущая беременность', 'Есть', 'Нет', true)}
         ${gatedHtml(a, 'hasPlannedPregnancy', 'Планируемая беременность', {
           yesLabel: 'Да', noLabel: 'Нет',
           detailLabel: 'Когда планируется',
-          placeholder: 'Например: в ближайшие 6 месяцев, через 1–2 года'
+          placeholder: 'Например: в ближайшие 6 месяцев, через 1–2 года',
+          required: true
         })}
-        ${simpleRadioHtml(a, 'hadDelivery',         'Роды в анамнезе',        'Были', 'Не было')}
-        ${simpleRadioHtml(a, 'hasLactation',        'Лактация в настоящее время', 'Есть', 'Нет')}
+        ${simpleRadioHtml(a, 'hadDelivery',         'Роды в анамнезе',        'Были', 'Не было', true)}
+        ${simpleRadioHtml(a, 'hasLactation',        'Лактация в настоящее время', 'Есть', 'Нет', true)}
       </div>
     </section>
   `;
@@ -146,14 +147,14 @@ function maleSectionHtml(a) {
       <p class="section-note">Снижение либидо или эректильной функции у выносливостных атлетов может быть признаком дефицита энергии, а не самостоятельной проблемой</p>
 
       <div class="disease-group">
-        ${gatedHtml(a, 'hasLibidoDecline',           'Снижение либидо за 6–12 мес')}
-        ${gatedHtml(a, 'hasErectileDecline',         'Снижение эректильной функции за 6–12 мес')}
-        ${gatedHtml(a, 'hasMorningErectionsDecline', 'Снижение частоты утренних эрекций')}
-        ${gatedHtml(a, 'hasMoodChanges',             'Изменения настроения')}
-        ${gatedHtml(a, 'hasMotivationChanges',       'Снижение мотивации')}
-        ${gatedHtml(a, 'hasAggressionChanges',       'Изменения агрессивности')}
-        ${gatedHtml(a, 'hasGynecomastia',            'Гинекомастия')}
-        ${gatedHtml(a, 'hasHairChanges',             'Изменения волосяного покрова')}
+        ${gatedHtml(a, 'hasLibidoDecline',           'Снижение либидо за 6–12 мес',              { required: true })}
+        ${gatedHtml(a, 'hasErectileDecline',         'Снижение эректильной функции за 6–12 мес', { required: true })}
+        ${gatedHtml(a, 'hasMorningErectionsDecline', 'Снижение частоты утренних эрекций',        { required: true })}
+        ${gatedHtml(a, 'hasMoodChanges',             'Изменения настроения',                     { required: true })}
+        ${gatedHtml(a, 'hasMotivationChanges',       'Снижение мотивации',                       { required: true })}
+        ${gatedHtml(a, 'hasAggressionChanges',       'Изменения агрессивности',                  { required: true })}
+        ${gatedHtml(a, 'hasGynecomastia',            'Гинекомастия',                             { required: true })}
+        ${gatedHtml(a, 'hasHairChanges',             'Изменения волосяного покрова',             { required: true })}
       </div>
     </section>
   `;
@@ -162,7 +163,7 @@ function maleSectionHtml(a) {
 function boneSectionHtml(a) {
   return `
     <section class="form-section">
-      <h2 class="form-section-title">4.3 Костное здоровье</h2>
+      <h2 class="form-section-title">4.4 Костное здоровье</h2>
       <p class="section-note">Низкая плотность костей и нарушения костного обмена — частые последствия энергодефицита, недостатка витамина D и кальция у спортсменов. Эти вопросы помогают оценить риск и подобрать поддерживающие протоколы</p>
 
       <div class="disease-group">
@@ -183,18 +184,18 @@ function boneSectionHtml(a) {
 function symptomsSectionHtml(a) {
   return `
     <section class="form-section">
-      <h2 class="form-section-title">4.4 Эндокринные симптомы</h2>
+      <h2 class="form-section-title">4.3 Эндокринные симптомы</h2>
       <p class="section-note">Жалобы по группам — для оценки возможной эндокринной дисрегуляции. Если симптомов нет — выбирайте «Нет»</p>
 
       <div class="disease-group">
         ${gatedHtml(a, 'hasGeneralSymptoms', 'Общие симптомы',
-          { placeholder: 'Усталость, нарушения сна, прибавка/потеря массы без объяснения, выпадение волос, изменения кожи' })}
+          { placeholder: 'Усталость, нарушения сна, прибавка/потеря массы без объяснения, выпадение волос, изменения кожи', required: true })}
         ${gatedHtml(a, 'hasHypothyroidSymptoms', 'Признаки сниженной функции щитовидной железы',
-          { placeholder: 'Зябкость, склонность к запорам, замедленный пульс утром' })}
+          { placeholder: 'Зябкость, склонность к запорам, замедленный пульс утром', required: true })}
         ${gatedHtml(a, 'hasMetabolicSymptoms', 'Признаки нарушений углеводного обмена',
-          { placeholder: 'Жажда, полиурия (частое обильное мочеиспускание), ночная потливость' })}
+          { placeholder: 'Жажда, полиурия (частое обильное мочеиспускание), ночная потливость', required: true })}
         ${gatedHtml(a, 'hasKnownSubclinical', 'Известные пограничные / субклинические состояния',
-          { placeholder: 'Например: субклинический гипотиреоз, вторичная гиперпролактинемия' })}
+          { placeholder: 'Например: субклинический гипотиреоз, вторичная гиперпролактинемия', required: true })}
       </div>
     </section>
   `;
@@ -259,11 +260,12 @@ function bindGated(container, key) {
 
 // Простая радиогруппа «X / Y» без раскрывающейся детали — компактнее,
 // чем gatedHtml с пустой textarea, для вопросов вида «было / не было».
-function simpleRadioHtml(a, key, label, yesLabel = 'Да', noLabel = 'Нет') {
+function simpleRadioHtml(a, key, label, yesLabel = 'Да', noLabel = 'Нет', required = false) {
+  const req = required ? ' <span class="req">*</span>' : '';
   return `
     <div class="gated-item">
       <div class="gated-row">
-        <label>${esc(label)}</label>
+        <label>${esc(label)}${req}</label>
         <div class="radio-row">
           <label class="radio">
             <input type="radio" name="${key}" value="yes" ${a[key] === 'yes' ? 'checked' : ''}>

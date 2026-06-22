@@ -145,7 +145,7 @@ export function render(container, { onBack, onNext }) {
       ${visibleSystems.map(sys => `
         <h3 class="form-subtitle">${esc(sys.title)}</h3>
         <div class="disease-group">
-          ${sys.diseases.map(d => gatedHtml(a, d.key, d.label, d)).join('')}
+          ${sys.diseases.map(d => gatedHtml(a, d.key, d.label, { ...d, required: sys.title !== 'Опорно-двигательная система' })).join('')}
         </div>
       `).join('')}
     </section>
@@ -153,18 +153,18 @@ export function render(container, { onBack, onNext }) {
     <!-- 3.2 ОПЕРАЦИИ, ГОСПИТАЛИЗАЦИИ, ТЯЖЁЛЫЕ ИНФЕКЦИИ -->
     <section class="form-section">
       <h2 class="form-section-title">3.2 Операции, госпитализации, тяжёлые инфекции</h2>
-      ${gatedHtml(a, 'hadSurgeries',       'Хирургические вмешательства',        { placeholder: 'Вид операции, дата, осложнения' })}
-      ${gatedHtml(a, 'hadInfections',      'Тяжёлые инфекции за последние 2 года', { placeholder: 'COVID-19 (тяжесть, post-COVID синдром), другие — что и когда' })}
-      ${gatedHtml(a, 'hadTransfusions',    'Гемотрансфузии в анамнезе',          { placeholder: 'Когда и по каким показаниям' })}
+      ${gatedHtml(a, 'hadSurgeries',       'Хирургические вмешательства',        { placeholder: 'Вид операции, дата, осложнения', required: true })}
+      ${gatedHtml(a, 'hadInfections',      'Тяжёлые инфекции за последние 2 года', { placeholder: 'COVID-19 (тяжесть, post-COVID синдром), другие — что и когда', required: true })}
+      ${gatedHtml(a, 'hadTransfusions',    'Гемотрансфузии в анамнезе',          { placeholder: 'Когда и по каким показаниям', required: true })}
       ${gatedHtml(a, 'hadStressFractures', 'Стресс-переломы',                    { placeholder: 'Локализация, давность, число эпизодов', required: true })}
     </section>
 
     <!-- 3.3 ТРАВМЫ И ИХ ПОСЛЕДСТВИЯ -->
     <section class="form-section">
       <h2 class="form-section-title">3.3 Травмы и их последствия</h2>
-      ${gatedHtml(a, 'hasActiveInjuries', 'Текущие активные травмы',                    { placeholder: 'Свежие повреждения мышц, связок, суставов — стадия, давность' })}
-      ${gatedHtml(a, 'hasChronicPain',    'Хронические тендинопатии или боли',          { placeholder: 'Локализация, интенсивность боли по шкале 0–10' })}
-      ${gatedHtml(a, 'usesNsaids',        'Регулярный приём НПВС или анальгетиков',     { placeholder: 'Какие препараты, как часто, по чьей рекомендации', detailLabel: 'Что и как' })}
+      ${gatedHtml(a, 'hasActiveInjuries', 'Текущие активные травмы',                    { placeholder: 'Свежие повреждения мышц, связок, суставов — стадия, давность', required: true })}
+      ${gatedHtml(a, 'hasChronicPain',    'Хронические тендинопатии или боли',          { placeholder: 'Локализация, интенсивность боли по шкале 0–10', required: true })}
+      ${gatedHtml(a, 'usesNsaids',        'Регулярный приём НПВС или анальгетиков',     { placeholder: 'Какие препараты, как часто, по чьей рекомендации', detailLabel: 'Что и как', required: true })}
 
       ${isAmateur ? '' : `
         <!-- FILTER (level=elite | pro): для любителей реабилитационный статус
@@ -181,11 +181,11 @@ export function render(container, { onBack, onNext }) {
     <!-- 3.4 АЛЛЕРГИИ И НЕПЕРЕНОСИМОСТИ -->
     <section class="form-section">
       <h2 class="form-section-title">3.4 Аллергии и непереносимости</h2>
-      ${gatedHtml(a, 'hasDrugAllergy',         'Лекарственная аллергия',                  { placeholder: 'Препарат — тип реакции (крапивница, анафилаксия, отёк Квинке)' })}
-      ${gatedHtml(a, 'hasFoodIntolerance',     'Пищевая непереносимость или аллергия',    { placeholder: 'Лактоза, глютен, орехи, морепродукты, яйцо, соя — что именно' })}
-      ${gatedHtml(a, 'hasNutrientIntolerance', 'Непереносимость отдельных нутриентов',    { placeholder: 'Железо — ЖКТ-побочка; магний — диарея; витамин C — изжога и т.п.' })}
-      ${gatedHtml(a, 'hasPhysicalAllergy',     'Физические аллергии',                     { placeholder: 'Холодовая, солнечная, холинергическая крапивница; анафилаксия на нагрузку' })}
-      ${gatedHtml(a, 'hasInjectionReaction',   'Реакции на инъекционные формы',           { placeholder: 'Тошнота, головокружение, флебиты — на что' })}
+      ${gatedHtml(a, 'hasDrugAllergy',         'Лекарственная аллергия',                  { placeholder: 'Препарат — тип реакции (крапивница, анафилаксия, отёк Квинке)', required: true })}
+      ${gatedHtml(a, 'hasFoodIntolerance',     'Пищевая непереносимость или аллергия',    { placeholder: 'Лактоза, глютен, орехи, морепродукты, яйцо, соя — что именно', required: true })}
+      ${gatedHtml(a, 'hasNutrientIntolerance', 'Непереносимость отдельных нутриентов',    { placeholder: 'Железо — ЖКТ-побочка; магний — диарея; витамин C — изжога и т.п.', required: true })}
+      ${gatedHtml(a, 'hasPhysicalAllergy',     'Физические аллергии',                     { placeholder: 'Холодовая, солнечная, холинергическая крапивница; анафилаксия на нагрузку', required: true })}
+      ${gatedHtml(a, 'hasInjectionReaction',   'Реакции на инъекционные формы',           { placeholder: 'Тошнота, головокружение, флебиты — на что', required: true })}
     </section>
 
     <!-- 3.5 ТЕКУЩАЯ ТЕРАПИЯ -->
