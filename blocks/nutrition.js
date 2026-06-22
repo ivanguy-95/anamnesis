@@ -148,7 +148,7 @@ export function render(container, { onBack, onNext }) {
       <div class="field">
         <label for="sweatLevel">Уровень потоотделения</label>
         <select id="sweatLevel" class="input">${optionsHtml(SWEAT_OPTIONS, a.sweatLevel)}</select>
-        <div class="field-help">Субъективно. Сильное — одежда после тренировки промокает, видны солевые разводы.</div>
+        <div class="field-help">Субъективно. Сильное — одежда после тренировки промокает, видны солевые разводы</div>
       </div>
 
       <div class="disease-group">

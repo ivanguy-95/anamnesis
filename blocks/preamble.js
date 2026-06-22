@@ -76,7 +76,7 @@ export function renderGoal(container, { onBack, onNext }) {
     <header class="step-header">
       <div class="step-eyebrow">Шаг 2 из 2 · Перед началом</div>
       <h1 class="step-title">Ваша цель</h1>
-      <p class="step-lead">Чего вы хотите добиться с помощью схемы? Сформулируйте свободным текстом — чем подробнее, тем точнее будут подобраны последующие вопросы.</p>
+      <p class="step-lead">Чего вы хотите добиться с помощью схемы? Сформулируйте свободным текстом — чем подробнее, тем точнее будут подобраны последующие вопросы</p>
     </header>
 
     <section class="form-section">

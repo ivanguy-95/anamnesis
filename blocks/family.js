@@ -105,7 +105,7 @@ export function render(container, { onBack, onNext }) {
               <label for="geneticTestPdfInput">Прикрепить результаты теста (PDF)</label>
               <input id="geneticTestPdfInput" class="file-input" type="file" accept="application/pdf,.pdf">
               <div id="geneticTestPdfStatus" class="file-status"></div>
-              <div class="field-help">Максимум 4 МБ. Сохраняется вместе с анкетой в браузере.</div>
+              <div class="field-help">Максимум 4 МБ. Сохраняется вместе с анкетой в браузере</div>
             </div>
           </div>
         </div>
@@ -255,7 +255,7 @@ function bindPdfInput(container) {
     const file = input.files[0];
     if (!file) return;
     if (file.size > PDF_MAX_BYTES) {
-      alert('Файл слишком большой (>4 МБ). Сожмите PDF или прикрепите другой.');
+      alert('Файл слишком большой (>4 МБ). Сожмите PDF или прикрепите другой');
       input.value = '';
       return;
     }

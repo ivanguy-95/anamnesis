@@ -32,7 +32,7 @@ export function render(container, { onBack, onNext }) {
     <header class="step-header">
       <div class="step-eyebrow">Блок 4</div>
       <h1 class="step-title">Эндокринно-репродуктивный статус</h1>
-      <p class="step-lead">Гормональная функция и репродуктивное здоровье. Эти вопросы помогают оценить риски, связанные с энергодоступностью (RED-S / Triad) и эндокринными нарушениями.</p>
+      <p class="step-lead">Гормональная функция и репродуктивное здоровье. Эти вопросы помогают оценить риски, связанные с энергодоступностью (RED-S / Triad) и эндокринными нарушениями</p>
     </header>
 
     ${isFemale ? femaleSectionHtml(a) : ''}
@@ -99,7 +99,7 @@ function femaleSectionHtml(a) {
   return `
     <section class="form-section">
       <h2 class="form-section-title">4.1 Гормональный фон</h2>
-      <p class="section-note">Female Athlete Triad — снижение энергодоступности приводит к нарушению цикла и плотности костей. Эти вопросы помогают оценить риск.</p>
+      <p class="section-note">Female Athlete Triad — снижение энергодоступности приводит к нарушению цикла и плотности костей. Эти вопросы помогают оценить риск</p>
 
       <div class="field-row">
         <div class="field">
@@ -163,7 +163,7 @@ function boneSectionHtml(a) {
   return `
     <section class="form-section">
       <h2 class="form-section-title">4.3 Костное здоровье</h2>
-      <p class="section-note">Низкая плотность костей и нарушения костного обмена — частые последствия энергодефицита, недостатка витамина D и кальция у спортсменов. Эти вопросы помогают оценить риск и подобрать поддерживающие протоколы.</p>
+      <p class="section-note">Низкая плотность костей и нарушения костного обмена — частые последствия энергодефицита, недостатка витамина D и кальция у спортсменов. Эти вопросы помогают оценить риск и подобрать поддерживающие протоколы</p>
 
       <div class="disease-group">
         ${gatedHtml(a, 'hasDexa', 'DEXA-исследование',
@@ -184,7 +184,7 @@ function symptomsSectionHtml(a) {
   return `
     <section class="form-section">
       <h2 class="form-section-title">4.4 Эндокринные симптомы</h2>
-      <p class="section-note">Жалобы по группам — для оценки возможной эндокринной дисрегуляции. Если симптомов нет — выбирайте «Нет».</p>
+      <p class="section-note">Жалобы по группам — для оценки возможной эндокринной дисрегуляции. Если симптомов нет — выбирайте «Нет»</p>
 
       <div class="disease-group">
         ${gatedHtml(a, 'hasGeneralSymptoms', 'Общие симптомы',

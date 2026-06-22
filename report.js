@@ -247,7 +247,7 @@ export function openReport() {
   const html = generateHtmlReport();
   const w = window.open('', '_blank');
   if (!w) {
-    alert('Браузер заблокировал открытие отчёта. Разрешите всплывающие окна.');
+    alert('Браузер заблокировал открытие отчёта. Разрешите всплывающие окна');
     return;
   }
   w.document.open();

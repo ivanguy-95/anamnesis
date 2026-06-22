@@ -120,13 +120,13 @@ function renderDone() {
       sendBtn.textContent = 'Отправлено ✓';
       sendStatus.hidden = false;
       sendStatus.className = 'send-status ok';
-      sendStatus.textContent = 'Анамнез отправлен врачу. Можно закрыть страницу.';
+      sendStatus.textContent = 'Анамнез отправлен врачу. Можно закрыть страницу';
     } else {
       sendBtn.disabled = false;
       sendBtn.textContent = 'Попробовать снова';
       sendStatus.hidden = false;
       sendStatus.className = 'send-status err';
-      sendStatus.textContent = 'Не удалось отправить. Проверьте подключение к интернету или попробуйте позже.';
+      sendStatus.textContent = 'Не удалось отправить. Проверьте подключение к интернету или попробуйте позже';
     }
   });
 }

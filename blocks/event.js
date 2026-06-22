@@ -101,7 +101,7 @@ export function render(container, { onBack, onNext }) {
         style="display:${isSingleDay ? 'block' : 'none'}">
         <label for="raceStartTime">Время старта</label>
         <input id="raceStartTime" class="input" type="time" value="${esc(a.raceStartTime)}">
-        <div class="field-help">Локальное время старта в месте проведения. Используется для тайминга предсоревновательных приёмов.</div>
+        <div class="field-help">Локальное время старта в месте проведения. Используется для тайминга предсоревновательных приёмов</div>
       </div>
 
       <div class="field" id="raceSchedule-wrap"
@@ -147,7 +147,7 @@ export function render(container, { onBack, onNext }) {
         <label for="weeksToStart">Недель до старта</label>
         <input id="weeksToStart" class="input" type="number" min="0" max="104"
           value="${a.weeksToStart ?? ''}">
-        <div class="field-help">Если оставите пустым — рассчитается автоматически от даты старта. Можно переопределить вручную.</div>
+        <div class="field-help">Если оставите пустым — рассчитается автоматически от даты старта. Можно переопределить вручную</div>
       </div>
 
       <!-- Любители: подсказка живёт внутри textarea как placeholder,
@@ -167,7 +167,7 @@ export function render(container, { onBack, onNext }) {
         <label for="keyBlocksPdfInput">Прикрепить PDF с УТП</label>
         <input id="keyBlocksPdfInput" class="file-input" type="file" accept="application/pdf,.pdf">
         <div id="keyBlocksPdfStatus" class="file-status"></div>
-        <div class="field-help">Максимум 4 МБ. Сохраняется вместе с анкетой в браузере.</div>
+        <div class="field-help">Максимум 4 МБ. Сохраняется вместе с анкетой в браузере</div>
       </div>
 
       <!-- Раскрывается, если в 2.1 отмечено «Место тренировок ≠ место соревнований». -->
@@ -491,7 +491,7 @@ function bindPdfInput(container) {
     const file = input.files[0];
     if (!file) return;
     if (file.size > PDF_MAX_BYTES) {
-      alert('Файл слишком большой (>4 МБ). Сожмите PDF или прикрепите другой.');
+      alert('Файл слишком большой (>4 МБ). Сожмите PDF или прикрепите другой');
       input.value = '';
       return;
     }

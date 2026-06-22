@@ -133,7 +133,7 @@ export function render(container, { onBack, onNext }) {
     <header class="step-header">
       <div class="step-eyebrow">Блок 3</div>
       <h1 class="step-title">Сведения о здоровье</h1>
-      <p class="step-lead">Хронические заболевания, операции, травмы, аллергии и текущая терапия. Для каждого раздела сначала укажите «Есть / Нет»; детали — только если «Есть».</p>
+      <p class="step-lead">Хронические заболевания, операции, травмы, аллергии и текущая терапия. Для каждого раздела сначала укажите «Есть / Нет»; детали — только если «Есть»</p>
     </header>
 
     <!-- 3.1 ХРОНИЧЕСКИЕ ЗАБОЛЕВАНИЯ -->
@@ -172,7 +172,7 @@ export function render(container, { onBack, onNext }) {
         <div class="field">
           <label for="rehabStatus">Реабилитационный статус</label>
           <textarea id="rehabStatus" class="textarea" rows="3"
-            placeholder="Иммобилизация в анамнезе, гипотрофия, мышечные дисбалансы — если есть. Можно оставить пустым."
+            placeholder="Иммобилизация в анамнезе, гипотрофия, мышечные дисбалансы — если есть. Можно оставить пустым"
           >${esc(a.rehabStatus)}</textarea>
         </div>
       `}
