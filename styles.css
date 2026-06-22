@@ -392,14 +392,14 @@ select.input {
 .file-input::file-selector-button,
 .file-input::-webkit-file-upload-button {
   font-family: inherit;
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 600;
   color: #fff;
   background: var(--accent);
   border: 0;
   border-radius: 30px;
-  padding: 9px 18px;
-  margin-right: 12px;
+  padding: 5px 12px;
+  margin-right: 10px;
   cursor: pointer;
   transition: background 0.15s;
 }
