@@ -98,7 +98,7 @@ export function render(container, { onBack, onNext }) {
 function femaleSectionHtml(a) {
   return `
     <section class="form-section">
-      <h2 class="form-section-title">4.1 Гормональный фон</h2>
+      <h2 class="form-section-title">1 Гормональный фон</h2>
       <p class="section-note">Female Athlete Triad — снижение энергодоступности приводит к нарушению цикла и плотности костей. Эти вопросы помогают оценить риск</p>
 
       <div class="field-row">
@@ -143,7 +143,7 @@ function femaleSectionHtml(a) {
 function maleSectionHtml(a) {
   return `
     <section class="form-section">
-      <h2 class="form-section-title">4.2 Гормональный фон</h2>
+      <h2 class="form-section-title">1 Гормональный фон</h2>
       <p class="section-note">Снижение либидо или эректильной функции у выносливостных атлетов может быть признаком дефицита энергии, а не самостоятельной проблемой</p>
 
       <div class="disease-group">
@@ -163,7 +163,7 @@ function maleSectionHtml(a) {
 function boneSectionHtml(a) {
   return `
     <section class="form-section">
-      <h2 class="form-section-title">4.4 Костное здоровье</h2>
+      <h2 class="form-section-title">3 Костное здоровье</h2>
       <p class="section-note">Низкая плотность костей и нарушения костного обмена — частые последствия энергодефицита, недостатка витамина D и кальция у спортсменов. Эти вопросы помогают оценить риск и подобрать поддерживающие протоколы</p>
 
       <div class="disease-group">
@@ -184,7 +184,7 @@ function boneSectionHtml(a) {
 function symptomsSectionHtml(a) {
   return `
     <section class="form-section">
-      <h2 class="form-section-title">4.3 Эндокринные симптомы</h2>
+      <h2 class="form-section-title">2 Эндокринные симптомы</h2>
       <p class="section-note">Жалобы по группам — для оценки возможной эндокринной дисрегуляции. Если симптомов нет — выбирайте «Нет»</p>
 
       <div class="disease-group">

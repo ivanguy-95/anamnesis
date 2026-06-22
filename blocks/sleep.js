@@ -30,7 +30,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 6.1 СОН -->
     <section class="form-section">
-      <h2 class="form-section-title">6.1 Сон</h2>
+      <h2 class="form-section-title">1 Сон</h2>
 
       <div class="field-row">
         <div class="field">
@@ -82,7 +82,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 6.2 ПСИХОЭМОЦИОНАЛЬНЫЙ ФОН -->
     <section class="form-section">
-      <h2 class="form-section-title">6.2 Психоэмоциональный фон</h2>
+      <h2 class="form-section-title">2 Психоэмоциональный фон</h2>
 
       <div class="field">
         <label for="preRaceAnxiety">Уровень тревожности перед стартами по шкале 1–10</label>
@@ -120,7 +120,7 @@ export function render(container, { onBack, onNext }) {
            HRV, шкалы Hooper/Borg/RPE и системный трекинг утреннего пульса
            актуальны при структурированной подготовке. -->
       <section class="form-section">
-        <h2 class="form-section-title">6.3 Перетренированность и восстановление</h2>
+        <h2 class="form-section-title">3 Перетренированность и восстановление</h2>
 
         <div class="disease-group">
           ${gatedHtml(a, 'tracksHrv', 'Измеряете HRV?', {
@@ -150,7 +150,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 6.4 ОБРАЗ ЖИЗНИ -->
     <section class="form-section">
-      <h2 class="form-section-title">6.4 Образ жизни</h2>
+      <h2 class="form-section-title">4 Образ жизни</h2>
 
       <div class="disease-group">
         ${gatedHtml(a, 'smokes', 'Курите', {

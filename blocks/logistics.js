@@ -28,7 +28,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 8.1 МЕСТО ПОСТОЯННОГО ПРОЖИВАНИЯ -->
     <section class="form-section">
-      <h2 class="form-section-title">8.1 Место постоянного проживания</h2>
+      <h2 class="form-section-title">1 Место постоянного проживания</h2>
       <div class="field-row">
         <div class="field">
           <label for="homeCity">Город</label>
@@ -44,7 +44,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 8.2 ЛОГИСТИКА ПОДГОТОВКИ -->
     <section class="form-section">
-      <h2 class="form-section-title">8.2 Логистика подготовки</h2>
+      <h2 class="form-section-title">2 Логистика подготовки</h2>
       <div class="disease-group">
         ${gatedHtml(a, 'hasFlightsToStart', 'Запланированы перелёты до старта?', {
           yesLabel: 'Да', noLabel: 'Нет',
@@ -61,7 +61,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 8.3 ДОСТУПНОСТЬ И ОГРАНИЧЕНИЯ -->
     <section class="form-section">
-      <h2 class="form-section-title">8.3 Доступность и ограничения</h2>
+      <h2 class="form-section-title">3 Доступность и ограничения</h2>
       <div class="disease-group">
         ${gatedHtml(a, 'hasAccessIssues', 'Сложности с доступом к лабораториям и аптекам?', {
           detailLabel: 'Что и где',

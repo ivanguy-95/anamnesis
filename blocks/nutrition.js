@@ -59,7 +59,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 5.1 ТЕКУЩИЙ РАЦИОН -->
     <section class="form-section">
-      <h2 class="form-section-title">5.1 Текущий рацион</h2>
+      <h2 class="form-section-title">1 Текущий рацион</h2>
 
       <div class="field">
         <label for="dietType">Тип питания <span class="req">*</span></label>
@@ -130,7 +130,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 5.2 ГИДРАТАЦИЯ И ЭЛЕКТРОЛИТЫ -->
     <section class="form-section">
-      <h2 class="form-section-title">5.2 Гидратация и электролиты</h2>
+      <h2 class="form-section-title">2 Гидратация и электролиты</h2>
 
       <div class="field-row">
         <div class="field">
@@ -168,7 +168,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 5.3 ЭНЕРГОДОСТУПНОСТЬ -->
     <section class="form-section">
-      <h2 class="form-section-title">5.3 Энергодоступность и риски энергодефицита</h2>
+      <h2 class="form-section-title">3 Энергодоступность и риски энергодефицита</h2>
 
       <div class="disease-group">
         ${gatedHtml(a, 'hasCalorieRestriction', 'Сознательное ограничение калорий', {
@@ -208,7 +208,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 5.4 ИСТОЧНИК БАДОВ И WADA-СЕРТИФИКАЦИЯ -->
     <section class="form-section">
-      <h2 class="form-section-title">5.4 Источник БАДов и сертификация</h2>
+      <h2 class="form-section-title">4 Источник БАДов и сертификация</h2>
 
       <div class="field">
         <label for="supplementSource">Где приобретаете БАДы и спортпит</label>

@@ -76,7 +76,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 2.1 ЦЕЛЕВОЕ СОБЫТИЕ -->
     <section class="form-section">
-      <h2 class="form-section-title">2.1 Ключевые соревнования</h2>
+      <h2 class="form-section-title">1 Ключевые соревнования</h2>
 
       <div class="field">
         <label for="raceName">Название соревнования <span class="req">*</span></label>
@@ -137,7 +137,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 2.2 УЧЕБНО-ТРЕНИРОВОЧНЫЙ ПРОЦЕСС -->
     <section class="form-section">
-      <h2 class="form-section-title">2.2 Учебно-тренировочный процесс</h2>
+      <h2 class="form-section-title">2 Учебно-тренировочный процесс</h2>
 
       <div class="field">
         <label for="currentPhase">Сегодняшний этап подготовки <span class="req">*</span></label>
@@ -196,7 +196,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 2.3 ПРЕДЫДУЩИЕ ПРОТОКОЛЫ -->
     <section class="form-section">
-      <h2 class="form-section-title">2.3 Предыдущие протоколы</h2>
+      <h2 class="form-section-title">3 Предыдущие протоколы</h2>
 
       <div class="field">
         <label>Был ли опыт фармакологической/нутритивной поддержки под старты?</label>

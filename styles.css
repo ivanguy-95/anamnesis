@@ -286,9 +286,6 @@ body.nav-open #nav-toggle.nav-burger span:nth-child(3) { transform: translateY(-
   margin: 0 0 16px;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--line);
-  /* В шрифте Bounded точка в номере раздела узкая и липнет к цифрам, из-за
-     чего «6.1» читается как «61». Небольшой letter-spacing отделяет точку. */
-  letter-spacing: 0.03em;
 }
 .form-subtitle {
   font-size: 12px;

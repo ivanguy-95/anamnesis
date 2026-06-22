@@ -101,7 +101,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 1.1 ПАСПОРТНАЯ ЧАСТЬ -->
     <section class="form-section">
-      <h2 class="form-section-title">1.1 Паспортная часть</h2>
+      <h2 class="form-section-title">1 Паспортная часть</h2>
 
       <div class="field">
         <label for="fullName">ФИО <span class="req">*</span></label>
@@ -143,7 +143,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 1.2 АНТРОПОМЕТРИЯ И КОМПОЗИЦИЯ ТЕЛА -->
     <section class="form-section">
-      <h2 class="form-section-title">1.2 Антропометрия и композиция тела</h2>
+      <h2 class="form-section-title">2 Антропометрия и композиция тела</h2>
 
       <div class="field-row">
         <div class="field">
@@ -247,7 +247,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 1.3 СПОРТИВНАЯ КВАЛИФИКАЦИЯ -->
     <section class="form-section">
-      <h2 class="form-section-title">1.3 Спортивная квалификация</h2>
+      <h2 class="form-section-title">3 Спортивная квалификация</h2>
 
       <!-- Список видов спорта: для каждого свой блок с амплуа (если командный)
            и разрядом. Поле «Дисциплина» убрано — в большинстве случаев
