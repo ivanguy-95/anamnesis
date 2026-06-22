@@ -996,7 +996,11 @@ select.input {
    Палитра наша: серая дорожка, синий ползунок, белая активная подпись. */
 .radio-row.toggle {
   position: relative;
-  display: inline-flex;
+  /* Две колонки равной ширины (по самой длинной подписи) — тогда обе половины
+     одинаковые, текст всегда помещается и центрируется, а ползунок (50%)
+     точно совпадает с активным сегментом. */
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
   flex: none;
   gap: 0;
   padding: 3px;
@@ -1011,7 +1015,6 @@ select.input {
   z-index: 1;
   margin: 0;
   gap: 0;
-  flex: 1 1 0;
   min-width: 54px;
   justify-content: center;
   text-align: center;
