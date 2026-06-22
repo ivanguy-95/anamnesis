@@ -70,7 +70,7 @@ export function render(container, { onBack, onNext }) {
     <header class="step-header">
       <div class="step-eyebrow">Блок 2</div>
       <h1 class="step-title">Ключевые соревнования и периодизация</h1>
-      <p class="step-lead">Под какое событие подбираем схему и на каком этапе подготовки вы сейчас.</p>
+      <p class="step-lead">Под какое событие подбираем схему и на каком этапе подготовки вы сейчас</p>
     </header>
 
     <!-- 2.1 ЦЕЛЕВОЕ СОБЫТИЕ -->
@@ -505,7 +505,7 @@ function bindPdfInput(container) {
       renderPdfStatus(container);
       input.value = ''; // позволить повторно выбрать тот же файл
     };
-    reader.onerror = () => alert('Не удалось прочитать файл.');
+    reader.onerror = () => alert('Не удалось прочитать файл');
     reader.readAsDataURL(file);
   });
   renderPdfStatus(container); // показать уже прикреплённый при загрузке страницы

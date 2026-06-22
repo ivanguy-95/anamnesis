@@ -26,7 +26,7 @@ export function render(container, { onBack, onNext }) {
     <header class="step-header">
       <div class="step-eyebrow">Блок 7</div>
       <h1 class="step-title">Семейный и генетический анамнез</h1>
-      <p class="step-lead">Болезни у близких родственников (родители, братья и сёстры, дети) и наследственные особенности — фон для оценки рисков и подбора препаратов.</p>
+      <p class="step-lead">Болезни у близких родственников (родители, братья и сёстры, дети) и наследственные особенности — фон для оценки рисков и подбора препаратов</p>
     </header>
 
     <!-- 7.1 ЗАБОЛЕВАНИЯ У РОДСТВЕННИКОВ 1-Й ЛИНИИ -->
@@ -269,7 +269,7 @@ function bindPdfInput(container) {
       renderPdfStatus(container);
       input.value = ''; // позволить повторно выбрать тот же файл
     };
-    reader.onerror = () => alert('Не удалось прочитать файл.');
+    reader.onerror = () => alert('Не удалось прочитать файл');
     reader.readAsDataURL(file);
   });
   renderPdfStatus(container); // показать уже прикреплённый при загрузке страницы

@@ -111,7 +111,7 @@ export function render(container, { onBack, onNext }) {
       <div class="field">
         <label for="birthDate">Дата рождения <span class="req">*</span></label>
         <input id="birthDate" class="input" type="date" value="${esc(a.birthDate)}">
-        <div class="field-help">Полная дата нужна для расчёта биологического возраста.</div>
+        <div class="field-help">Полная дата нужна для расчёта биологического возраста</div>
       </div>
 
       <div class="field">
@@ -136,7 +136,7 @@ export function render(container, { onBack, onNext }) {
       <div class="field">
         <label for="trainingCountry">Страна тренировок</label>
         <input id="trainingCountry" class="input" type="text" value="${esc(a.trainingCountry)}">
-        <div class="field-help">Важно для оценки доступности препаратов в конкретной юрисдикции.</div>
+        <div class="field-help">Важно для оценки доступности препаратов в конкретной юрисдикции</div>
       </div>
     </section>
 
@@ -187,7 +187,7 @@ export function render(container, { onBack, onNext }) {
            видов спорта, командные игры и т.п.). -->
       <div class="field">
         <label>Целевая соревновательная масса</label>
-        <div class="field-help">Применимо для единоборств, лёгких категорий, эстетических видов.</div>
+        <div class="field-help">Применимо для единоборств, лёгких категорий, эстетических видов</div>
         <div class="radio-row">
           <label class="radio">
             <input type="radio" name="targetWeightNeeded" value="yes"
@@ -260,7 +260,7 @@ export function render(container, { onBack, onNext }) {
         <label for="yearsTraining">Общий тренировочный стаж, лет</label>
         <input id="yearsTraining" class="input" type="number"
           min="0" max="80" value="${a.yearsTraining ?? ''}">
-        <div class="field-help">Сумма лет регулярных тренировок во всех видах суммарно.</div>
+        <div class="field-help">Сумма лет регулярных тренировок во всех видах суммарно</div>
       </div>
 
       ${isElite ? `
@@ -521,7 +521,7 @@ function sportItemHtml(s, idx) {
         <label>Амплуа / специализация</label>
         <input class="input sport-role" type="text" data-key="role"
           placeholder="Например: нападающий, защитник, либеро" value="${esc(s.role)}">
-        <div class="field-help">Появилось, потому что выбран командный вид спорта.</div>
+        <div class="field-help">Появилось, потому что выбран командный вид спорта</div>
       </div>
 
       <div class="field" style="margin-bottom:0;">

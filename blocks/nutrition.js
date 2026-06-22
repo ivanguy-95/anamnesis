@@ -54,7 +54,7 @@ export function render(container, { onBack, onNext }) {
     <header class="step-header">
       <div class="step-eyebrow">Блок 5</div>
       <h1 class="step-title">Нутритивный анамнез и энергодоступность</h1>
-      <p class="step-lead">Как вы питаетесь, как пьёте, какие добавки используете и есть ли риски энергодефицита.</p>
+      <p class="step-lead">Как вы питаетесь, как пьёте, какие добавки используете и есть ли риски энергодефицита</p>
     </header>
 
     <!-- 5.1 ТЕКУЩИЙ РАЦИОН -->

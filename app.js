@@ -99,7 +99,7 @@ function renderDone() {
   root.innerHTML = `
     <div class="done-screen">
       <h1>Анкета заполнена</h1>
-      <p>Нажмите кнопку ниже, чтобы отправить анамнез врачу.</p>
+      <p>Нажмите кнопку ниже, чтобы отправить анамнез врачу</p>
 
       <div class="done-actions">
         <button class="btn-primary" id="send-doctor-btn" type="button">Отправить врачу</button>

@@ -143,7 +143,7 @@ function maleSectionHtml(a) {
   return `
     <section class="form-section">
       <h2 class="form-section-title">4.2 Гормональный фон</h2>
-      <p class="section-note">Снижение либидо или эректильной функции у выносливостных атлетов может быть признаком дефицита энергии, а не самостоятельной проблемой.</p>
+      <p class="section-note">Снижение либидо или эректильной функции у выносливостных атлетов может быть признаком дефицита энергии, а не самостоятельной проблемой</p>
 
       <div class="disease-group">
         ${gatedHtml(a, 'hasLibidoDecline',           'Снижение либидо за 6–12 мес')}

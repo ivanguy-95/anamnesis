@@ -19,7 +19,7 @@ export function renderLevel(container, { onNext }) {
     <header class="step-header">
       <div class="step-eyebrow">Шаг 1 из 2 · Перед началом</div>
       <h1 class="step-title">Уровень спортивной подготовки</h1>
-      <p class="step-lead">Этот выбор определяет, какие блоки и вопросы будут показаны дальше.</p>
+      <p class="step-lead">Этот выбор определяет, какие блоки и вопросы будут показаны дальше</p>
     </header>
 
     <section class="form-section">
@@ -28,21 +28,21 @@ export function renderLevel(container, { onNext }) {
                 data-value="elite" type="button">
           <div class="level-card-title">Элита</div>
           <div class="level-card-desc">
-            Спортсмены, выступающие в сборных, командах и клубах на высоком уровне.
+            Спортсмены, выступающие в сборных, командах и клубах на высоком уровне
           </div>
         </button>
         <button class="level-card ${meta.level === 'pro' ? 'selected' : ''}"
                 data-value="pro" type="button">
           <div class="level-card-title">Профессионал</div>
           <div class="level-card-desc">
-            Спортсмены, выступающие на высоком уровне в частных и крупных соревнованиях.
+            Спортсмены, выступающие на высоком уровне в частных и крупных соревнованиях
           </div>
         </button>
         <button class="level-card ${meta.level === 'amateur' ? 'selected' : ''}"
                 data-value="amateur" type="button">
           <div class="level-card-title">Любитель</div>
           <div class="level-card-desc">
-            Спортсмены, занимающиеся спортом для поддержания формы.
+            Спортсмены, занимающиеся спортом для поддержания формы
           </div>
         </button>
       </div>
@@ -81,7 +81,7 @@ export function renderGoal(container, { onBack, onNext }) {
 
     <section class="form-section">
       <textarea id="goal" class="textarea" rows="6"
-        placeholder="Например: подготовиться к Ironman 70.3 в июле, удержать массу 72 кг, восстановить ферритин."
+        placeholder="Например: подготовиться к Ironman 70.3 в июле, удержать массу 72 кг, восстановить ферритин"
       >${escapeText(meta.goal)}</textarea>
     </section>
 
