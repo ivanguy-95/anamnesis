@@ -25,8 +25,8 @@ export function initHelp(container) {
     const pop = item.querySelector('.help-pop');
     const ncRadio = item.querySelector('input.nc-radio');
     const btn = pop && pop.querySelector('.help-pop-btn');
+    const badge = item.querySelector('.nc-badge');
     const visibleRadios = item.querySelectorAll('.radio-row input[type="radio"]');
-    const toggle = item.querySelector('.radio-row');
 
     // «?» — раскрыть/свернуть поповер (и закрыть остальные).
     icon.addEventListener('click', e => {
@@ -42,28 +42,25 @@ export function initHelp(container) {
       }
     });
 
-    // «Не проверял» — проставить not_checked, посереть, свернуть поповер.
+    // «Не проверял» — проставить not_checked: тумблер заменяется бейджем.
     if (btn && ncRadio) {
       btn.addEventListener('click', () => {
         ncRadio.checked = true;
         ncRadio.dispatchEvent(new Event('change', { bubbles: true }));
         item.classList.add('gated-item--notchecked');
-        // Сбросить визуал тумблера (ползунок/активная подпись).
-        if (toggle && toggle.classList.contains('toggle')) {
-          toggle.classList.add('toggle--unset');
-          toggle.querySelectorAll('.radio').forEach(s => s.classList.remove('is-active'));
-        }
         if (pop) pop.setAttribute('hidden', '');
         icon.setAttribute('aria-expanded', 'false');
       });
     }
 
-    // Выбор «Есть/Нет» снимает состояние «не проверял».
+    // Клик по бейджу «не проверялся» возвращает тумблер для выбора ответа.
+    if (badge) {
+      badge.addEventListener('click', () => item.classList.remove('gated-item--notchecked'));
+    }
+
+    // Выбор «Есть/Нет» окончательно снимает состояние «не проверял».
     visibleRadios.forEach(r =>
       r.addEventListener('change', () => item.classList.remove('gated-item--notchecked'))
     );
-
-    // Восстановление сохранённого состояния.
-    if (ncRadio && ncRadio.checked) item.classList.add('gated-item--notchecked');
   });
 }

@@ -234,6 +234,7 @@ function gatedHtml(a, key, label, opts = {}) {
             ${esc(noLabel)}
           </label>
         </div>
+        ${opts.help ? `<button type="button" class="nc-badge" title="Нажмите, чтобы выбрать ответ">не проверялся</button>` : ''}
       </div>
       ${opts.help ? `
         <input type="radio" name="${key}" value="not_checked" class="nc-radio" ${notChecked ? 'checked' : ''} hidden>

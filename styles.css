@@ -1144,6 +1144,28 @@ select.input {
   color: var(--text);
   background: var(--surface-2);
 }
-/* Состояние «не проверялся»: строка приглушается (серая). */
-.gated-item--notchecked .gated-row > label { color: var(--text-3); }
-.gated-item--notchecked .radio-row.toggle { opacity: 0.45; }
+/* Состояние «не проверялся»: тумблер «Да/Нет» заменяется бейджем «не проверялся»
+   (по клику бейдж убирается и возвращается тумблер для выбора ответа). */
+.nc-badge {
+  display: none;
+  align-items: center;
+  flex: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-3);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.nc-badge:hover {
+  color: var(--text-2);
+  border-color: var(--line-strong);
+  background: var(--surface);
+}
+.gated-item--notchecked .radio-row { display: none; }
+.gated-item--notchecked .nc-badge { display: inline-flex; }
