@@ -2,18 +2,22 @@
    help.js
    -------
    Опция «?» для специфических вопросов-гейтов. Рядом с вопросом — кружок «?»,
-   по клику раскрывается поповер с кратким обоснованием, цветной подсказкой и
-   кнопкой «Не проверял». После нажатия:
-     • гейту проставляется значение 'not_checked' (через скрытый radio той же
-       группы → срабатывает обычный autosave/bindGated блока);
-     • строка сереет (класс .gated-item--notchecked);
-     • в итоговом отчёте значение выводится как «не проверялся».
+   по клику раскрывается поповер с кратким обоснованием.
 
-   Если позже выбрать «Есть/Нет» — серость снимается, значение перезаписывается.
+   • Обычное состояние: в поповере кнопка «Не проверял». После нажатия гейту
+     проставляется 'not_checked' (через скрытый radio той же группы →
+     срабатывает обычный autosave/bindGated блока), тумблер заменяется бейджем
+     «не проверялся», а в отчёте значение выводится как «не проверялся».
+   • Состояние «не проверялся»: в поповере вместо «Не проверял» — синяя кнопка
+     «Вернуть». Она очищает значение и возвращает тумблер для выбора ответа.
 
-   Подключение: после рендера блока — initHelp(container). Разметку «?» +
-   поповер + скрытый radio добавляет gatedHtml при наличии opts.help.
+   Выбор «Есть/Нет» тоже снимает состояние «не проверялся».
+
+   Подключение: после рендера блока — initHelp(container). Разметку добавляет
+   gatedHtml при наличии opts.help.
    --------------------------------------------------------------------------- */
+
+import { getProfile, saveProfile } from './state.js';
 
 export function initHelp(container) {
   container.querySelectorAll('.help-icon').forEach(icon => {
@@ -24,9 +28,30 @@ export function initHelp(container) {
     if (!item) return;
     const pop = item.querySelector('.help-pop');
     const ncRadio = item.querySelector('input.nc-radio');
-    const btn = pop && pop.querySelector('.help-pop-btn');
+    const markBtn = pop && pop.querySelector('.help-pop-btn');       // «Не проверял»
+    const returnBtn = pop && pop.querySelector('.help-pop-return');  // «Вернуть»
     const badge = item.querySelector('.nc-badge');
     const visibleRadios = item.querySelectorAll('.radio-row input[type="radio"]');
+
+    function closePop() {
+      if (pop) pop.setAttribute('hidden', '');
+      icon.setAttribute('aria-expanded', 'false');
+    }
+
+    // Очистить значение гейта и вернуть тумблер.
+    function returnGate() {
+      if (ncRadio) {
+        ncRadio.checked = false;
+        const key = ncRadio.name;
+        const profile = getProfile();
+        for (const block of Object.values(profile.blocks)) {
+          if (key in block.answers) { block.answers[key] = ''; break; }
+        }
+        saveProfile();
+      }
+      item.classList.remove('gated-item--notchecked');
+      closePop();
+    }
 
     // «?» — раскрыть/свернуть поповер (и закрыть остальные).
     icon.addEventListener('click', e => {
@@ -43,22 +68,22 @@ export function initHelp(container) {
     });
 
     // «Не проверял» — проставить not_checked: тумблер заменяется бейджем.
-    if (btn && ncRadio) {
-      btn.addEventListener('click', () => {
+    if (markBtn && ncRadio) {
+      markBtn.addEventListener('click', () => {
         ncRadio.checked = true;
         ncRadio.dispatchEvent(new Event('change', { bubbles: true }));
         item.classList.add('gated-item--notchecked');
-        if (pop) pop.setAttribute('hidden', '');
-        icon.setAttribute('aria-expanded', 'false');
+        closePop();
       });
     }
 
-    // Клик по бейджу «не проверялся» возвращает тумблер для выбора ответа.
-    if (badge) {
-      badge.addEventListener('click', () => item.classList.remove('gated-item--notchecked'));
-    }
+    // «Вернуть» — очистить и вернуть тумблер.
+    if (returnBtn) returnBtn.addEventListener('click', returnGate);
 
-    // Выбор «Есть/Нет» окончательно снимает состояние «не проверял».
+    // Клик по бейджу «не проверялся» тоже возвращает тумблер.
+    if (badge) badge.addEventListener('click', returnGate);
+
+    // Выбор «Есть/Нет» снимает состояние «не проверялся».
     visibleRadios.forEach(r =>
       r.addEventListener('change', () => item.classList.remove('gated-item--notchecked'))
     );

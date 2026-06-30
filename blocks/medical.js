@@ -283,6 +283,7 @@ function gatedHtml(a, key, label, opts = {}) {
           <p class="help-pop-note">${esc(opts.help)}</p>
           <p class="help-pop-hint">Если не проверяли, нажмите на кнопку</p>
           <button type="button" class="help-pop-btn">Не проверял</button>
+          <button type="button" class="help-pop-return">Вернуть</button>
         </div>
       ` : ''}
       <div class="gated-detail" id="${detailKey}-wrap" style="display:${yes ? 'block' : 'none'}">
