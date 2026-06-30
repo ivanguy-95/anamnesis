@@ -61,7 +61,7 @@ body {
 
 /* ---------- Лейаут: бар разделов + контент ---------- */
 #layout {
-  max-width: 812px;
+  max-width: 940px;
   margin: 0 auto;
   display: flex;
   align-items: flex-start;
@@ -130,7 +130,7 @@ body {
 
 /* ---------- Шапка: логотип (слева) + бургер (на телефоне, справа) ---------- */
 #app-header {
-  max-width: 812px;
+  max-width: 940px;
   margin: 0 auto;
   display: flex;
   align-items: center;
