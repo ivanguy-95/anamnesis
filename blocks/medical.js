@@ -92,12 +92,12 @@ const SYSTEMS_3_1 = [
     title: 'Кровь и иммунитет',
     diseases: [
       { key: 'bloodAnemia',           label: 'Анемия в анамнезе' },
-      { key: 'bloodHbv',              label: 'HBV',                       abbrFull: 'вирусный гепатит B' },
-      { key: 'bloodHcv',              label: 'HCV',                       abbrFull: 'вирусный гепатит C' },
-      { key: 'bloodHsv',              label: 'HSV',                       abbrFull: 'вирус простого герпеса' },
-      { key: 'bloodEbv',              label: 'EBV',                       abbrFull: 'вирус Эпштейна-Барр' },
-      { key: 'bloodCmv',              label: 'CMV',                       abbrFull: 'цитомегаловирус' },
-      { key: 'bloodHiv',              label: 'HIV',                       abbrFull: 'ВИЧ' },
+      { key: 'bloodHbv',              label: 'Вирусный гепатит B',         abbrFull: 'HBV' },
+      { key: 'bloodHcv',              label: 'Вирусный гепатит C',         abbrFull: 'HCV' },
+      { key: 'bloodHsv',              label: 'Вирус простого герпеса',     abbrFull: 'HSV' },
+      { key: 'bloodEbv',              label: 'Вирус Эпштейна-Барр',        abbrFull: 'EBV' },
+      { key: 'bloodCmv',              label: 'Цитомегаловирус',            abbrFull: 'CMV' },
+      { key: 'bloodHiv',              label: 'ВИЧ',                        abbrFull: 'HIV' },
       { key: 'bloodFrequentInfections', label: 'Частые ОРВИ / инфекции' }
     ]
   },
