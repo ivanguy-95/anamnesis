@@ -34,7 +34,7 @@ const SYSTEMS_3_1 = [
     diseases: [
       { key: 'cvHypertension',        label: 'Гипертензия' },
       { key: 'cvArrhythmia',          label: 'Аритмии' },
-      { key: 'cvProlapse',            label: 'Пролапсы клапанов' },
+      { key: 'cvProlapse',            label: 'Пролапсы клапанов', help: 'Выявляются на ЭхоКГ (УЗИ сердца). Если эхокардиографию не делали — нажмите «Не проверял».' },
       { key: 'cvMyocardiodystrophy',  label: 'Миокардиодистрофия' },
       { key: 'cvMyocarditis',         label: 'Перенесённые миокардиты' }
     ]
@@ -76,7 +76,7 @@ const SYSTEMS_3_1 = [
       { key: 'respAsthma',            label: 'Бронхиальная астма' },
       { key: 'respEib',               label: 'EIB',                       abbrFull: 'астма физического напряжения' },
       { key: 'respCopd',              label: 'ХОБЛ',                      abbrFull: 'хроническая обструктивная болезнь лёгких' },
-      { key: 'respSinusitis',         label: 'Частые синуситы' }
+      { key: 'respSinusitis',         label: 'Частые синуситы', help: 'Повторяющиеся воспаления околоносовых пазух (≥2–3 раза в год). Если не отслеживали или не уверены — нажмите «Не проверял».' }
     ]
   },
   {
@@ -94,9 +94,9 @@ const SYSTEMS_3_1 = [
       { key: 'bloodAnemia',           label: 'Анемия в анамнезе' },
       { key: 'bloodHbv',              label: 'Вирусный гепатит B',         abbrFull: 'HBV' },
       { key: 'bloodHcv',              label: 'Вирусный гепатит C',         abbrFull: 'HCV' },
-      { key: 'bloodHsv',              label: 'Вирус простого герпеса',     abbrFull: 'HSV' },
-      { key: 'bloodEbv',              label: 'Вирус Эпштейна-Барр',        abbrFull: 'EBV' },
-      { key: 'bloodCmv',              label: 'Цитомегаловирус',            abbrFull: 'CMV' },
+      { key: 'bloodHsv',              label: 'Вирус простого герпеса',     abbrFull: 'HSV', help: 'Определяется анализом крови на антитела или ПЦР. Рутинно не сдаётся — если не проверяли, нажмите «Не проверял».' },
+      { key: 'bloodEbv',              label: 'Вирус Эпштейна-Барр',        abbrFull: 'EBV', help: 'Определяется анализом крови на антитела. Обычно не входит в стандартный чек-ап — если не сдавали, нажмите «Не проверял».' },
+      { key: 'bloodCmv',              label: 'Цитомегаловирус',            abbrFull: 'CMV', help: 'Определяется анализом крови на антитела/ПЦР. Обычно не входит в стандартный чек-ап — если не сдавали, нажмите «Не проверял».' },
       { key: 'bloodHiv',              label: 'ВИЧ',                        abbrFull: 'HIV' },
       { key: 'bloodFrequentInfections', label: 'Частые ОРВИ / инфекции' }
     ]
@@ -141,7 +141,7 @@ export function render(container, { onBack, onNext }) {
          «Есть / Нет» с раскрывающимся textarea. Аббревиатуры (АИТ, ГЭРБ и т.п.)
          идут с расшифровкой в abbrFull — мелким серым рядом. -->
     <section class="form-section">
-      <h2 class="form-section-title">1 Хронические заболевания и диагнозы</h2>
+      <h2 class="form-section-title">1. Хронические заболевания и диагнозы</h2>
       ${visibleSystems.map(sys => `
         <h3 class="form-subtitle">${esc(sys.title)}</h3>
         <div class="disease-group">
@@ -152,16 +152,16 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 3.2 ОПЕРАЦИИ, ГОСПИТАЛИЗАЦИИ, ТЯЖЁЛЫЕ ИНФЕКЦИИ -->
     <section class="form-section">
-      <h2 class="form-section-title">2 Операции, госпитализации, тяжёлые инфекции</h2>
+      <h2 class="form-section-title">2. Операции, госпитализации, тяжёлые инфекции</h2>
       ${gatedHtml(a, 'hadSurgeries',       'Хирургические вмешательства',        { placeholder: 'Вид операции, дата, осложнения', required: true })}
       ${gatedHtml(a, 'hadInfections',      'Тяжёлые инфекции за последние 2 года', { placeholder: 'COVID-19 (тяжесть, post-COVID синдром), другие — что и когда', required: true })}
-      ${gatedHtml(a, 'hadTransfusions',    'Гемотрансфузии в анамнезе',          { placeholder: 'Когда и по каким показаниям', required: true })}
+      ${gatedHtml(a, 'hadTransfusions',    'Гемотрансфузии в анамнезе',          { placeholder: 'Когда и по каким показаниям', required: true, help: 'Переливания крови или её компонентов. Если не помните или не уверены — нажмите «Не проверял».' })}
       ${gatedHtml(a, 'hadStressFractures', 'Стресс-переломы',                    { placeholder: 'Локализация, давность, число эпизодов', required: true })}
     </section>
 
     <!-- 3.3 ТРАВМЫ И ИХ ПОСЛЕДСТВИЯ -->
     <section class="form-section">
-      <h2 class="form-section-title">3 Травмы и их последствия</h2>
+      <h2 class="form-section-title">3. Травмы и их последствия</h2>
       ${gatedHtml(a, 'hasActiveInjuries', 'Текущие активные травмы',                    { placeholder: 'Свежие повреждения мышц, связок, суставов — стадия, давность', required: true })}
       ${gatedHtml(a, 'hasChronicPain',    'Хронические тендинопатии или боли',          { placeholder: 'Локализация, интенсивность боли по шкале 0–10', required: true })}
       ${gatedHtml(a, 'usesNsaids',        'Регулярный приём НПВС или анальгетиков',     { placeholder: 'Какие препараты, как часто, по чьей рекомендации', detailLabel: 'Что и как', required: true })}
@@ -180,7 +180,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 3.4 АЛЛЕРГИИ И НЕПЕРЕНОСИМОСТИ -->
     <section class="form-section">
-      <h2 class="form-section-title">4 Аллергии и непереносимости</h2>
+      <h2 class="form-section-title">4. Аллергии и непереносимости</h2>
       ${gatedHtml(a, 'hasDrugAllergy',         'Лекарственная аллергия',                  { placeholder: 'Препарат — тип реакции (крапивница, анафилаксия, отёк Квинке)', required: true })}
       ${gatedHtml(a, 'hasFoodIntolerance',     'Пищевая непереносимость или аллергия',    { placeholder: 'Лактоза, глютен, орехи, морепродукты, яйцо, соя — что именно', required: true })}
       ${gatedHtml(a, 'hasNutrientIntolerance', 'Непереносимость отдельных нутриентов',    { placeholder: 'Железо — ЖКТ-побочка; магний — диарея; витамин C — изжога и т.п.', required: true })}
@@ -190,7 +190,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 3.5 ТЕКУЩАЯ ТЕРАПИЯ -->
     <section class="form-section">
-      <h2 class="form-section-title">5 Текущая терапия</h2>
+      <h2 class="form-section-title">5. Текущая терапия</h2>
       ${gatedHtml(a, 'hasCurrentMeds',  'Постоянный приём лекарств',          { placeholder: 'Препарат — дозировка — частота — с какого времени', detailLabel: 'Что и в каких дозах' })}
       ${gatedHtml(a, 'hasSupplements',  'БАДы, спортпит, протеины, изотоники', { placeholder: 'Что именно, производитель, дозировка, частота' })}
 
@@ -251,15 +251,20 @@ export function render(container, { onBack, onNext }) {
 function gatedHtml(a, key, label, opts = {}) {
   const detailKey  = key + 'Detail';
   const yes        = a[key] === 'yes';
+  const notChecked = a[key] === 'not_checked';
   const yesLabel   = opts.yesLabel   || 'Есть';
   const noLabel    = opts.noLabel    || 'Нет';
   const detailLbl  = opts.detailLabel;
   const required   = opts.required   ? ' <span class="req">*</span>' : '';
   const abbrFull   = opts.abbrFull   ? ` <span class="abbr-full">(${esc(opts.abbrFull)})</span>` : '';
+  // Опция «?» с обоснованием и кнопкой «Не проверял» (см. help.js).
+  const helpIcon = opts.help
+    ? ` <button type="button" class="help-icon" aria-label="Пояснение" aria-expanded="false">?</button>`
+    : '';
   return `
-    <div class="gated-item">
+    <div class="gated-item${notChecked ? ' gated-item--notchecked' : ''}">
       <div class="gated-row">
-        <label>${esc(label)}${abbrFull}${required}</label>
+        <label>${esc(label)}${abbrFull}${required}${helpIcon}</label>
         <div class="radio-row">
           <label class="radio">
             <input type="radio" name="${key}" value="yes" ${yes ? 'checked' : ''}>
@@ -270,7 +275,16 @@ function gatedHtml(a, key, label, opts = {}) {
             ${esc(noLabel)}
           </label>
         </div>
+        ${opts.help ? `<button type="button" class="nc-badge" title="Нажмите, чтобы выбрать ответ">не проверялся</button>` : ''}
       </div>
+      ${opts.help ? `
+        <input type="radio" name="${key}" value="not_checked" class="nc-radio" ${notChecked ? 'checked' : ''} hidden>
+        <div class="help-pop" hidden>
+          <p class="help-pop-note">${esc(opts.help)}</p>
+          <p class="help-pop-hint">Если не проверяли, нажмите на кнопку</p>
+          <button type="button" class="help-pop-btn">Не проверял</button>
+        </div>
+      ` : ''}
       <div class="gated-detail" id="${detailKey}-wrap" style="display:${yes ? 'block' : 'none'}">
         ${detailLbl ? `<label for="${detailKey}">${esc(detailLbl)}</label>` : ''}
         <textarea id="${detailKey}" class="textarea" rows="3"

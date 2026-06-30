@@ -31,7 +31,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 7.1 ЗАБОЛЕВАНИЯ У РОДСТВЕННИКОВ 1-Й ЛИНИИ -->
     <section class="form-section">
-      <h2 class="form-section-title">1 Заболевания у родственников 1-й линии</h2>
+      <h2 class="form-section-title">1. Заболевания у родственников 1-й линии</h2>
       <div class="disease-group">
         ${gatedHtml(a, 'familyCvd', 'Сердечно-сосудистые заболевания', {
           abbrFull: 'инфаркт, тяжёлая ИБС — особенно важны случаи у мужчин до 55 лет и у женщин до 65',
@@ -54,7 +54,7 @@ export function render(container, { onBack, onNext }) {
 
     <!-- 7.2 НАСЛЕДСТВЕННЫЕ РИСКИ -->
     <section class="form-section">
-      <h2 class="form-section-title">2 Наследственные риски</h2>
+      <h2 class="form-section-title">2. Наследственные риски</h2>
       <div class="disease-group">
         ${gatedHtml(a, 'familyThrombophilia', 'Тромбофилии', {
           abbrFull: 'фактор V Лейден, мутация протромбина G20210A, MTHFR — повышенный риск тромбозов',
@@ -76,7 +76,7 @@ export function render(container, { onBack, onNext }) {
     <!-- Кастомная разметка вместо gatedHtml: в раскрытии нужны textarea
          с расшифровкой + поле прикрепления PDF результата. -->
     <section class="form-section">
-      <h2 class="form-section-title">3 Генетическое тестирование</h2>
+      <h2 class="form-section-title">3. Генетическое тестирование</h2>
       <div class="disease-group">
         <div class="gated-item">
           <div class="gated-row">

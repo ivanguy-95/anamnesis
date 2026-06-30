@@ -54,7 +54,12 @@ export function validateRequired(container) {
 function isFilled(field) {
   const radios = field.querySelectorAll('input[type="radio"]');
   if (radios.length) {
-    return Array.from(radios).some(r => r.checked);
+    if (Array.from(radios).some(r => r.checked)) return true;
+    // «Не проверял»: скрытый radio not_checked в родительском .gated-item —
+    // это тоже валидный ответ для обязательного вопроса.
+    const item = field.closest('.gated-item');
+    if (item && item.querySelector('input.nc-radio:checked')) return true;
+    return false;
   }
   const ctrls = field.querySelectorAll(
     'input:not([type="radio"]):not([type="hidden"]), select, textarea'

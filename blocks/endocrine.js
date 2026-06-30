@@ -57,7 +57,7 @@ export function render(container, { onBack, onNext }) {
   if (isFemale) gates.push(
     'hasOligomenorrhea', 'hasAmenorrhea', 'hasPrimaryAmenorrhea',
     'hasPms', 'hasDysmenorrhea',
-    'hasPlannedPregnancy'
+    'hasPlannedPregnancy', 'hadDelivery'
   );
   if (isMale) gates.push(
     'hasLibidoDecline', 'hasErectileDecline', 'hasMorningErectionsDecline',
@@ -70,7 +70,7 @@ export function render(container, { onBack, onNext }) {
   // ---------- Простые радио (без раскрывающейся детали) ----------
   // Для женщин: текущая беременность, роды, лактация.
   if (isFemale) {
-    ['hasCurrentPregnancy', 'hadDelivery', 'hasLactation']
+    ['hasCurrentPregnancy', 'hasLactation']
       .forEach(key => bindSimpleRadio(container, key));
   }
 
@@ -98,7 +98,7 @@ export function render(container, { onBack, onNext }) {
 function femaleSectionHtml(a) {
   return `
     <section class="form-section">
-      <h2 class="form-section-title">1 Гормональный фон</h2>
+      <h2 class="form-section-title">1. Гормональный фон</h2>
       <p class="section-note">Female Athlete Triad — снижение энергодоступности приводит к нарушению цикла и плотности костей. Эти вопросы помогают оценить риск</p>
 
       <div class="field-row">
@@ -133,7 +133,11 @@ function femaleSectionHtml(a) {
           placeholder: 'Например: в ближайшие 6 месяцев, через 1–2 года',
           required: true
         })}
-        ${simpleRadioHtml(a, 'hadDelivery',         'Роды в анамнезе',        'Были', 'Не было', true)}
+        ${gatedHtml(a, 'hadDelivery', 'Роды', {
+          yesLabel: 'Были', noLabel: 'Не было', required: true,
+          detailLabel: 'Когда',
+          placeholder: 'Например: в 2021 году; 2 года назад'
+        })}
         ${simpleRadioHtml(a, 'hasLactation',        'Лактация в настоящее время', 'Есть', 'Нет', true)}
       </div>
     </section>
@@ -143,7 +147,7 @@ function femaleSectionHtml(a) {
 function maleSectionHtml(a) {
   return `
     <section class="form-section">
-      <h2 class="form-section-title">1 Гормональный фон</h2>
+      <h2 class="form-section-title">1. Гормональный фон</h2>
       <p class="section-note">Снижение либидо или эректильной функции у выносливостных атлетов может быть признаком дефицита энергии, а не самостоятельной проблемой</p>
 
       <div class="disease-group">
@@ -163,7 +167,7 @@ function maleSectionHtml(a) {
 function boneSectionHtml(a) {
   return `
     <section class="form-section">
-      <h2 class="form-section-title">3 Костное здоровье</h2>
+      <h2 class="form-section-title">3. Костное здоровье</h2>
       <p class="section-note">Низкая плотность костей и нарушения костного обмена — частые последствия энергодефицита, недостатка витамина D и кальция у спортсменов. Эти вопросы помогают оценить риск и подобрать поддерживающие протоколы</p>
 
       <div class="disease-group">
@@ -186,7 +190,7 @@ function boneSectionHtml(a) {
 function symptomsSectionHtml(a) {
   return `
     <section class="form-section">
-      <h2 class="form-section-title">2 Эндокринные симптомы</h2>
+      <h2 class="form-section-title">2. Эндокринные симптомы</h2>
       <p class="section-note">Жалобы по группам — для оценки возможной эндокринной дисрегуляции. Если симптомов нет — выбирайте «Нет»</p>
 
       <div class="disease-group">

@@ -122,7 +122,7 @@ const LABELS = {
   hasPms: 'ПМС', hasDysmenorrhea: 'Дисменорея',
   hasCurrentPregnancy: 'Текущая беременность',
   hasPlannedPregnancy: 'Планируемая беременность',
-  hadDelivery: 'Роды в анамнезе', hasLactation: 'Лактация',
+  hadDelivery: 'Роды', hasLactation: 'Лактация',
   hasLibidoDecline: 'Снижение либидо',
   hasErectileDecline: 'Снижение эректильной функции',
   hasMorningErectionsDecline: 'Снижение утренних эрекций',
