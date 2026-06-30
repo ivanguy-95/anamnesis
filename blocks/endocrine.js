@@ -169,9 +169,11 @@ function boneSectionHtml(a) {
       <div class="disease-group">
         ${gatedHtml(a, 'hasDexa', 'DEXA-исследование',
           { abbrFull: 'двухэнергетическая рентгеновская абсорбциометрия — измерение плотности костей',
-            detailLabel: 'Z-score / T-score, дата, регионы (поясница, бедро, всё тело)' })}
+            detailLabel: 'Z-score / T-score, дата, регионы (поясница, бедро, всё тело)',
+            help: 'DEXA — денситометрия для оценки плотности костей. Делается в клинике по направлению врача и не входит в рутинные обследования, поэтому у многих спортсменов её не было.' })}
         ${gatedHtml(a, 'hasBoneMarkers', 'Маркеры костного обмена',
-          { detailLabel: 'Остеокальцин, P1NP, β-CrossLaps — что и какие значения' })}
+          { detailLabel: 'Остеокальцин, P1NP, β-CrossLaps — что и какие значения',
+            help: 'Это специальные анализы крови (остеокальцин, P1NP, β-CrossLaps). Назначаются врачом и обычно не входят в стандартный чек-ап.' })}
         ${gatedHtml(a, 'hasFamilyOsteoporosis', 'Остеопороз у родственников 1-й линии',
           { detailLabel: 'Кто и в каком возрасте' })}
         ${gatedHtml(a, 'hasLowBodyWeightHistory', 'Низкая масса тела в подростковом возрасте',
@@ -208,15 +210,20 @@ function symptomsSectionHtml(a) {
 function gatedHtml(a, key, label, opts = {}) {
   const detailKey  = key + 'Detail';
   const yes        = a[key] === 'yes';
+  const notChecked = a[key] === 'not_checked';
   const yesLabel   = opts.yesLabel   || 'Есть';
   const noLabel    = opts.noLabel    || 'Нет';
   const detailLbl  = opts.detailLabel;
   const required   = opts.required   ? ' <span class="req">*</span>' : '';
   const abbrFull   = opts.abbrFull   ? ` <span class="abbr-full">(${esc(opts.abbrFull)})</span>` : '';
+  // Опция «?» с обоснованием и кнопкой «Не проверял» (см. help.js).
+  const helpIcon = opts.help
+    ? ` <button type="button" class="help-icon" aria-label="Пояснение" aria-expanded="false">?</button>`
+    : '';
   return `
-    <div class="gated-item">
+    <div class="gated-item${notChecked ? ' gated-item--notchecked' : ''}">
       <div class="gated-row">
-        <label>${esc(label)}${abbrFull}${required}</label>
+        <label>${esc(label)}${abbrFull}${required}${helpIcon}</label>
         <div class="radio-row">
           <label class="radio">
             <input type="radio" name="${key}" value="yes" ${yes ? 'checked' : ''}>
@@ -228,6 +235,14 @@ function gatedHtml(a, key, label, opts = {}) {
           </label>
         </div>
       </div>
+      ${opts.help ? `
+        <input type="radio" name="${key}" value="not_checked" class="nc-radio" ${notChecked ? 'checked' : ''} hidden>
+        <div class="help-pop" hidden>
+          <p class="help-pop-note">${esc(opts.help)}</p>
+          <p class="help-pop-hint">Если не проверяли, нажмите на кнопку</p>
+          <button type="button" class="help-pop-btn">Не проверял</button>
+        </div>
+      ` : ''}
       <div class="gated-detail" id="${detailKey}-wrap" style="display:${yes ? 'block' : 'none'}">
         ${detailLbl ? `<label for="${detailKey}">${esc(detailLbl)}</label>` : ''}
         <textarea id="${detailKey}" class="textarea" rows="3"

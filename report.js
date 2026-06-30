@@ -384,6 +384,7 @@ function renderBlockSection(blockKey, block) {
 function formatValue(key, value) {
   if (value === 'yes') return 'Да';
   if (value === 'no')  return 'Нет';
+  if (value === 'not_checked') return 'не проверялся';
 
   if (key === 'sports' && Array.isArray(value)) return formatSports(value);
 
